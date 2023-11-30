@@ -56,7 +56,7 @@ const webhookHandler = async (req, res) => {
             QueueUrl: process.env.AWS_SQS_URL,
             MessageBody: JSON.stringify({
               paymentIntentId: paymentIntent.id,
-              customerEmail: paymentIntent.receipt_email,
+              customerId: paymentIntent.customer,
             }),
           }).promise();
           console.log(data);

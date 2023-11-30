@@ -18,6 +18,8 @@ export default function PreviewPage() {
 
   const [image, setImage] = React.useState(null);
 
+  const [faces, setFaces] = React.useState(null);
+
   React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -40,6 +42,25 @@ export default function PreviewPage() {
     }
     getProducts();  
   }, []);
+
+  React.useEffect(() => {
+    if (image) {
+      const getFaces = async (image) => {
+        const formData = new FormData();
+        formData.append('faces', image);
+        const response = await axios.post('http://localhost:5000', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'mode': 'cors',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          }
+        });
+        setFaces(response.data.faces);
+      }
+      getFaces(image);
+    }
+  }, [image]);
 
   const sendOrderInfo = async () => {
     const selectedProducts = products.filter(product => product.selected);
@@ -88,6 +109,12 @@ export default function PreviewPage() {
         setImage(file);
       }}
     />
+    <b>
+      {
+        faces === 1 ? 
+        'OK' : `There are ${faces} faces in this photo. Please upload a photo with only one face.`
+      }
+    </b>
     <hr />
     <div>
       <section>

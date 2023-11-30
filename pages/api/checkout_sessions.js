@@ -4,7 +4,8 @@ import { Formidable } from 'formidable';
 
 import { createReadStream } from 'fs';
 
-import { S3 } from 'aws-sdk';
+import S3 from '../../cloud/s3';
+import Dynamo from '../../cloud/dynamo';
 
 export const config = {
   api: {
@@ -40,22 +41,30 @@ export default async function handler(req, res) {
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
-      const s3 = new S3({
-        region: 'us-east-1',
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      });
-      s3.upload({
+      const s3 = new S3();
+      
+      await s3.upload({
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
-        Body: image[0].filepath,
-      }, (err, data) => {
-        if (err) {
-          console.log(err);
-          throw err;
-        }
-        console.log(data);
+        Body: createReadStream(image[0].filepath),
       });
+      const dynamo = new Dynamo();
+      const params = {
+        TableName: 'customers',
+        Item: {
+          'paymentIntentId': { S: session.payment_intent },
+          'pricesBeforeCheckout': {
+            L: products.map(product => {
+              return {
+                S: product.default_price
+              }
+            })
+          },
+          'session': { S: session.id },
+          'preferences': { M: {} },
+        }
+      };
+      dynamo.put(params);
       res.status(200).json(session);
     } catch (err) {
       console.log(err);
