@@ -15,7 +15,7 @@ The VisageVerse minimal application aims to deliver the following functionallity
 
 1. Build the application
 ~~~shell
-$ npm install
+$ yarn add
 ~~~
 
 2. _Optional_: download and run the [Stripe CLI](https://stripe.com/docs/stripe-cli)
@@ -25,10 +25,35 @@ $ stripe listen --forward-to localhost:3000/api/webhooks
 
 3. Run the application
 ~~~shell
-$ STRIPE_WEBHOOK_SECRET=$(stripe listen --print-secret) npm run dev
+$ yarn dev
 ~~~
 
 4. Go to [localhost:3000](http://localhost:3000)
 
 Notice commands can be run all alone and environment variables are really set in the code intended to be read from a .env file.
+
+
+## Functional Details
+
+### Catalog
+
+Catalog is loaded from Stripe and has images rendered already. The idea here is to simply make UI changes without altering state management (which is very simple). A "products" state variable is initialized as an empty list and gets the products Stripe and gives them the "selected" attribute set to false by default. Mapping products to html/react elements allows us to show the products in whatever order needed. There are also meta tags that help in ordering the products -mainly in ordering them by tiers. Modify rendering and ordering.
+
+### Image upload
+
+There is a form component with button and drag n drop to upload the image. Then there comes a response from an api service which verifies there is a single detectable face present in the image. Enabling next steps depends on the result of this operation coming as an integer equal to 1 (which is the expected number of faces in the image). Happy path is to enable the user to go to the next action "Proceed to checkout". If face validation is different from 1, then display a message to the user; if there is an error with the api call, fail silently and allow the user to proceed at their own risk. The api service is already integrated and has a sample on how to render results to the user. Modify image upload widget and conform to the current backend implementation.
+
+### Redirect to Stripe
+
+Clicking the "proceed to checkout" or similar button automatically redirects the user to stripe and finishes the first part of the exprience. Simply modify the button UI/UX.
+
+### Confirm Stripe operation
+
+Stripe redirects back to our website after a finished operation. Now it redirects to the same / page, but this is flexible and we can have a /confirmation page. That page should render the confirmation status in a pleasent and clear way for our users.
+
+### Download images
+
+After clicking a link on their email (handled by backend) the user lands on the /fullfilment/[pi] page where there is an "images" variable that has all the data for the images the user got including names for the products corresponding to such images, the image links and metadata regarding the product tiers. Here we need to show the products to the user, make each image available for download individually, and have a button for downlaod all. The download all functionality is already coded in: a zip file with all the images is download in page load. Simply make the "download all" button replay that action. 
+
+## Environment Variables
 
