@@ -48,7 +48,7 @@ export default function PreviewPage() {
       const getFaces = async (image) => {
         const formData = new FormData();
         formData.append('faces', image);
-        const response = await axios.post('http://localhost:5000', formData, {
+        const response = await axios.post(process.env.NEXT_PUBLIC_FACE_DETECTION_URL, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'mode': 'cors',

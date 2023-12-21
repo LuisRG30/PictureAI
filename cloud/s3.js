@@ -9,6 +9,18 @@ class S3Client {
     });
   }
 
+  async listObjects(params) {
+    return await this.s3.listObjectsV2(params).promise();
+  }
+
+  getObject(params) {
+    return this.s3.getObject(params);
+  }
+
+  async getSignedUrl(operation, params) {
+    return await this.s3.getSignedUrlPromise(operation, params);
+  }
+
   async upload(params) {
     return await this.s3.upload(params).promise();
   }
