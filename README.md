@@ -57,3 +57,14 @@ After clicking a link on their email (handled by backend) the user lands on the 
 
 ## Environment Variables
 
+The required environment variables to be placed in a .env file in the root of the proyect are:
+1. NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+2. STRIPE_SECRET_KEY
+3. STRIPE_WEBHOOK_SECRET
+4. AWS_S3_BUCKET_NAME
+5. AWS_ACCESS_KEY_ID
+6. AWS_SECRET_ACCESS_KEY
+7. AWS_SQS_URL
+8. NEXT_PUBLIC_FACE_DETECTION_URI
+
+All variables will be provided by codes owners for local development purposes and will be ready with sample data where necessary.
