@@ -19,6 +19,7 @@ The VisageVerse minimal application aims to deliver the following functionallity
    When hover on images, image name shows
 
    Animation reference: FIFA packs https://www.youtube.com/watch?v=fPrTSA1ULso
+   Clash royale chests https://www.youtube.com/watch?v=h75wpfiPaaI
 8. A privacy policy and terms and conditions page that tells the user about our data managemenr within the app.
 
 
