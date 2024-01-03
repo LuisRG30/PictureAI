@@ -3,11 +3,24 @@
 The VisageVerse minimal application aims to deliver the following functionallity:
 1. Provide a home page with the description of the service with some examples. (Located at / route).
 2. A page with the product catalog of individual images where user can select a number of products in their order. Includes a filter to select a gender (male/female/all) and to show only those images. It also includes a small form to specify preferences about the images. If male is selected then the formulary is: exclude bald?, vary facial hair?, and possible hair colors. If female is selected, then: possible hair colors. (Located at /images route)
-3. A page where the mystery boxes are offered, with the same form, including "select gender" for the images in the mystery box. (Located at /mystery-boxes route)
+3. A page where the mystery boxes are offered, with the same form mentioned in 2., including "select gender" for the images in the mystery box. (Located at /mystery-boxes route)
 4. A page within the single page application where after selecting the products, it shows a bar or modal with a summary of the selected products and the price. In the center of this page, there is a widget to upload a single picture of the user himself, all this in the context of the single page application (also at the / route).
 5. A confirmation page that is displayed after redirection from Stripe at the moment of a successfull or unsuccessful purchase. It tells the user the status of the charge operation (could be displayed at / or another route like /confirmation).
 6. A delivery page, where after gaining access to a link via email, our users can retrieve the pictures they have paid for. A zip file is automatically downloaded, the pictures displayed on screen with animations for the most important pictures that came out of the user's order -decided by product tier hierarchy.
-7. A privacy policy and terms and conditions page that tells the user about our data managemenr within the app.
+   Animation:
+   A mystery box opening while drum rolls or any music plays that builds up hype.
+   Once opened, claps or victory music plays and animation shows one of the top tier images in the box covering most of the screen.
+   Top tier image fades out and all images are displayed as thumbnails, ordered by tier.
+   Images have a color glow depending on its tier.
+   Legendary: orange
+   Epic: purple
+   Rare: blue
+   Common: No glow
+   When hover on images, image name shows
+
+   Animation reference: FIFA packs https://www.youtube.com/watch?v=fPrTSA1ULso
+   Clash royale chests https://www.youtube.com/watch?v=h75wpfiPaaI
+8. A privacy policy and terms and conditions page that tells the user about our data managemenr within the app.
 
 
 
