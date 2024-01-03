@@ -18,7 +18,7 @@ The VisageVerse minimal application aims to deliver the following functionallity
    Common: No glow
    When hover on images, image name shows
 
-   Animation reference: FIFA packs
+   Animation reference: FIFA packs https://www.youtube.com/watch?v=fPrTSA1ULso
 8. A privacy policy and terms and conditions page that tells the user about our data managemenr within the app.
 
 
