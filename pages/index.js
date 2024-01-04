@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import { loadStripe } from '@stripe/stripe-js';
 
-import ServiceCard from '../components/ServiceCard';
+import {ServiceCard} from '../src/components';
+import { CreateImages } from '@/src/sections';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -82,74 +83,77 @@ export default function PreviewPage() {
 
 
   return (
-    <div>
-    {products.map((product, index) => (
-      <div
-        key={product.id}
-        onClick={() => {
-          const updatedProducts = [...products];
-          updatedProducts[index].selected = !updatedProducts[index].selected;
-          setProducts(updatedProducts);
-        }}
-      >
-        <ServiceCard
-          key={product.id}
-          name={product.name}
-          image={product.images[0]}
-          selected={product.selected}
-        />
-      </div>
-    ))}
-    <hr />
-    <input
-      type="file"
-      name="photo"
-      onChange={event => {
-        const file = event.target.files[0];
-        setImage(file);
-      }}
-    />
-    <b>
-      {
-        faces === 1 ? 
-        'OK' : `There are ${faces} faces in this photo. Please upload a photo with only one face.`
-      }
-    </b>
-    <hr />
-    <div>
-      <section>
-        <button onClick={sendOrderInfo}>
-          Checkout
-        </button>
-      </section>
-      <style jsx>
-        {`
-          section {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: 112px;
-            border-radius: 6px;
-            justify-content: space-between;
-          }
-          button {
-            height: 36px;
-            background: #556cd6;
-            border-radius: 4px;
-            color: white;
-            border: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-          }
-          button:hover {
-            opacity: 0.8;
-          }
-        `}
-      </style>
-    </div>
-    </div>
+    // <div>
+    // {products.map((product, index) => (
+    //   <div
+    //     key={product.id}
+    //     onClick={() => {
+    //       const updatedProducts = [...products];
+    //       updatedProducts[index].selected = !updatedProducts[index].selected;
+    //       setProducts(updatedProducts);
+    //     }}
+    //   >
+    //     <ServiceCard
+    //       key={product.id}
+    //       name={product.name}
+    //       image={product.images[0]}
+    //       selected={product.selected}
+    //     />
+    //   </div>
+    // ))}
+    // <hr />
+    // <input
+    //   type="file"
+    //   name="photo"
+    //   onChange={event => {
+    //     const file = event.target.files[0];
+    //     setImage(file);
+    //   }}
+    // />
+    // <b>
+    //   {
+    //     faces === 1 ? 
+    //     'OK' : `There are ${faces} faces in this photo. Please upload a photo with only one face.`
+    //   }
+    // </b>
+    // <hr />
+    // <div>
+    //   <section>
+    //     <button onClick={sendOrderInfo}>
+    //       Checkout
+    //     </button>
+    //   </section>
+    //   <style jsx>
+    //     {`
+    //       section {
+    //         background: #ffffff;
+    //         display: flex;
+    //         flex-direction: column;
+    //         width: 400px;
+    //         height: 112px;
+    //         border-radius: 6px;
+    //         justify-content: space-between;
+    //       }
+    //       button {
+    //         height: 36px;
+    //         background: #556cd6;
+    //         border-radius: 4px;
+    //         color: white;
+    //         border: 0;
+    //         font-weight: 600;
+    //         cursor: pointer;
+    //         transition: all 0.2s ease;
+    //         box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    //       }
+    //       button:hover {
+    //         opacity: 0.8;
+    //       }
+    //     `}
+    //   </style>
+    // </div>
+    // </div>
+    <>
+      <CreateImages />
+    </>
   );
 }
