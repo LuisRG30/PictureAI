@@ -17,18 +17,20 @@ const Header = () => {
           <Link href="/" className="flex items-center">
             <p className="">Home</p>
           </Link>
-          <div className="flex flex-row gap-0.5 cursor-pointer items-center">
-            <p className="text-gray-400">Products</p>
-            <img
-              src="/assets/images/down-arrow.png"
-              alt="arrow-icon"
-              className="w-[20px] h-[20px] object-contain"
-            />
-          </div>
+          <Link href="/products" className="flex items-center">
+            <div className="flex flex-row gap-0.5 cursor-pointer items-center">
+              <p className="text-gray-400">Products</p>
+              <img
+                src="/assets/images/down-arrow.png"
+                alt="arrow-icon"
+                className="w-[20px] h-[20px] object-contain"
+              />
+            </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export {Header};
+export { Header };
