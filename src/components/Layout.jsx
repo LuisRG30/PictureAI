@@ -1,8 +1,8 @@
-import {Header, Footer} from './';
+import { Header, Footer } from "./";
 
 const RootLayout = ({ children }) => {
   return (
-    <div className="bg-black overflow-hidden">
+    <div className="bg-black ">
       <Header />
       <main>{children}</main>
       <Footer />
@@ -10,4 +10,4 @@ const RootLayout = ({ children }) => {
   );
 };
 
-export {RootLayout};
+export { RootLayout };

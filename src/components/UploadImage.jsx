@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button } from '.';
+import { useState } from "react";
+import { Button } from ".";
 
 const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
   const [preview, setPreview] = useState(null);
@@ -8,7 +8,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
 
     if (file) {
       // Check if the file type is either an image or a video
-      if (file.type.startsWith('image/')) {
+      if (file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onloadend = () => {
           setUploadedImage(reader.result);
@@ -17,7 +17,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
         reader.readAsDataURL(file);
       } else {
         // Handle invalid file type
-        alert('Invalid file type. Please upload an image or video.');
+        alert("Invalid file type. Please upload an image or video.");
       }
     }
   };
@@ -32,12 +32,16 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
       <div className="border border-dashed border-gray-800 h-[300px] rounded-2xl p-4 flex flex-col gap-3 w-full">
         <div
           className="border-[0.5px] h-[80%] rounded-xl border-gray-800 flex items-center justify-center relative"
-          style={{ background: 'rgba(222, 41, 226, 0.08)' }}
+          style={{ background: "rgba(222, 41, 226, 0.08)" }}
         >
           {preview ? (
-            <img src={preview} alt="Preview" className="max-h-full max-w-full w-full" />
+            <img
+              src={preview}
+              alt="Preview"
+              className="max-h-full max-w-full w-full"
+            />
           ) : (
-            <p className="text-[20px] text-center">Preview</p>
+            <p className="text-[20px] text-center ">Preview</p>
           )}
           {preview && (
             <div
@@ -51,7 +55,11 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
         </div>
         <div className="flex flex-row justify-end gap-2">
           <label className="relative overflow-hidden">
-            <Button text="Upload" image="/assets/svgs/Isolation_Mode.svg" />
+            <Button
+              text="Upload"
+              image="/assets/svgs/Isolation_Mode.svg"
+              isSelected={true}
+            />
             <input
               type="file"
               accept="image/*, video/*"

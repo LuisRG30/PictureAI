@@ -14,44 +14,50 @@ const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
   };
 
   return (
-    <div className="flex flex-col w-full py-4 gap-4">
-      <div className="flex md:flex-row flex-col md:gap-0 gap-2 w-full justify-between">
-        <div className="flex flex-col gap-2 md:w-[65%] w-full">
+    <div
+      className={`flex flex-col w-full pt-[45px] py-4 ${
+        isSelectedFilter && "border border-[#374151] px-5"
+      } rounded-lg`}
+    >
+      <div className="flex md:flex-row flex-col gap-4 w-full max-w-[1150px] justify-between ">
+        <div className="flex flex-col gap-2 w-full ">
           <p className="md:text-[20px]  font-bold">Genres</p>
           <Dropdown options={GenresData} placeholder={"Select Genre..."} />
         </div>
-        <div className="flex flex-col gap-2 md:w-[33%] w-full">
-          <p className="md:text-[20px] text-[16px] font-bold">Sizes</p>
-          <Dropdown options={Dimensions} placeholder={"Size"} />
-        </div>
+        {!isSelectedFilter && (
+          <div className="flex flex-col gap-2 md:w-[33%] w-full">
+            <p className="md:text-[20px] text-[16px] font-bold">Sizes</p>
+            <Dropdown options={Dimensions} placeholder={"Size"} />
+          </div>
+        )}
       </div>
-      <div className="flex flex-row gap-2 w-full">
+      <div className="flex flex-row flex-wrap gap-2 w-full mt-[18px]">
         {GenresData.map((dim, i) => (
-          <Button text={dim} key={i}/>
+          <Button text={dim} key={i} isSelected={i === 0} />
         ))}
       </div>
 
-      <ImageGallery
-        ImageSources={filters}
-        handleImageSelection={handleToggleFilter}
-        isSelectedImage={isSelectedFilter}
-      />
-
+      <div className={`max-w-[1150px]`}>
+        <ImageGallery
+          ImageSources={filters}
+          handleImageSelection={handleToggleFilter}
+          isSelectedImage={isSelectedFilter}
+        />
+      </div>
       {isSelectedFilter && (
         <div
-          className=" py-4 border-t border-gray-500
+          className="mt-4 py-4 border-t border-[#BABABA57] 
         flex flex-col"
         >
-          <p className="sub-text text-[15px]">
+          <p className="text-white text-[14.43px] font-[helvetica] leading-[27.91px]">
             Selected Images will be shown here
           </p>
-          <div className="pt-4">
-            <ImageGallery
-              ImageSources={selectedFilters}
-              isSelectionDisabled={true}
-              isSelectedImage={true}
-            />
-          </div>
+          <ImageGallery
+            ImageSources={selectedFilters}
+            handleImageSelection={handleToggleFilter}
+            isSelectionDisabled={true}
+            isSelectedImage={true}
+          />
         </div>
       )}
 

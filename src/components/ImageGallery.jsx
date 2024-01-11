@@ -6,17 +6,23 @@ const ImageGallery = ({
   isSelectedImage,
   isSelectionDisabled,
   isRemoveEnabled,
-  handleRemoveImage
+  handleRemoveImage,
 }) => {
   return (
     <>
       {!isRemoveEnabled ? (
-        <div className="flex flex-wrap justify-center w-full gap-4">
+        <div
+          className={`flex flex-wrap justify-start w-full gap-4 ${
+            isSelectedImage ? "mt-[35px]" : "mt-[50px]"
+          }`}
+        >
           {Array.isArray(ImageSources) &&
             ImageSources.map((img, i) => (
               <div
-                className="flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/3 lg:w-1/4 xl:w-1/6
-                 rounded-md mb-3 relative cursor-pointer"
+                className={`flex-shrink-0 ${
+                  isSelectedImage ? "w-[112px] h-[112px]" : "w-[217px] h-217px"
+                }
+                 rounded-md mb-3 relative cursor-pointer`}
                 onClick={() => handleImageSelection(img?.id)}
                 key={i}
               >
@@ -42,8 +48,8 @@ const ImageGallery = ({
                 )}
                 <img
                   key={i}
-                  className={`max-h-[270px] sm:h-[150px] h-[120px]
-                  ${isSelectedImage ? "md:h-[82px]" : "md:h-[220px]"}  w-full
+                  className={`h-full
+                  ${isSelectedImage ? "w-full" : "md:h-[220px]"}  w-full
                   
                   `}
                   src={`assets/images/${img.source}`}
@@ -66,7 +72,9 @@ const ImageGallery = ({
                 alt={`img-${index}`}
                 style={{ top: "5px", right: "5px" }}
                 className="absolute w-[12px] h-[12px] cursor-pointer"
-                onClick={() => {handleRemoveImage(filter?.id)}}
+                onClick={() => {
+                  handleRemoveImage(filter?.id);
+                }}
               />
               <img
                 src={`assets/images/${filter.source}`}

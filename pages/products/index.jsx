@@ -42,11 +42,19 @@ const Products = () => {
   }, [uploadImage, filters]);
 
   return (
-    <div className={`${!isSelectedFilter && "xPaddings"} relative`}>
-      <div className="mx-auto flex md:flex-row flex-col justify-between gap-2 max-width">
+    <div
+      className={`relative min-h-screen mx-auto`}
+      style={{ maxWidth: "1440px" }}
+    >
+      <div
+        className={`mx-auto flex md:flex-row flex-col justify-center ${
+          isSelectedFilter ? "w-full gap-2" : ""
+        }`}
+      >
         <div
-          className={`flex-none w-[45%]  ${isSelectedFilter && "xPaddings"}`}
-          style={isSelectedFilter ? stylesSelectionBox : {}}
+          className={`flex flex-wrap w-[45%] ${
+            isSelectedFilter && "rgba(222, 41, 226, 0.08) max-w-[45%] "
+          }`}
         >
           <Genres
             filters={filters}
@@ -56,9 +64,9 @@ const Products = () => {
         </div>
 
         {isSelectedFilter && (
-          <div className="md:w-[55%] w-full md:px-0 xPaddings">
-            <div className={"flex w-full h-full justify-center"}>
-              <div className="flex flex-col w-[400px] items-center gap-6">
+          <div className="w-full md:px-0 xPaddings min-w-[50%]">
+            <div className={"flex w-full h-full justify-center max-w-[600px]"}>
+              <div className="flex flex-col w-full items-center gap-6">
                 <UploadImage
                   image={uploadImage}
                   setUploadedImage={(img) => {
@@ -77,7 +85,7 @@ const Products = () => {
                     dispatch(removeFilteredImagesById(id));
                   }}
                 />
-                <div className="w-full">
+                <div className="w-full mt-[164px]">
                   <Button
                     text={"Checkout"}
                     styles={{
@@ -86,7 +94,7 @@ const Products = () => {
                       minWidth: "100%",
                       border: "1px solid white",
                     }}
-                    onClick={() =>{}}
+                    onClick={() => {}}
                   />
                 </div>
               </div>
