@@ -18,7 +18,7 @@ const Products = () => {
   const [isSelectedFilter, setIsSelectedFilter] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const stylesSelectionBox = {
-    // width:'75%',
+    //width:'45%',
     background: "rgba(222, 41, 226, 0.08)",
   };
 
@@ -58,7 +58,7 @@ const Products = () => {
         {isSelectedFilter && (
           <div className="md:w-[55%] w-full md:px-0 xPaddings">
             <div className={"flex w-full h-full justify-center"}>
-              <div className="flex flex-col w-[400px] items-center gap-6">
+              <div className="flex flex-col min-w-[400px] w-full items-center gap-6">
                 <UploadImage
                   image={uploadImage}
                   setUploadedImage={(img) => {

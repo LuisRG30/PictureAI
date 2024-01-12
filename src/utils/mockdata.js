@@ -1,4 +1,11 @@
-export const GenresData = ["Abstract", "Art", "Cartoon"];
+export const GenresData = [
+  "Abstract",
+  "Art",
+  "Cartoon",
+  "Digital Art",
+  "Cyberpunk",
+  "Sci-fi",
+];
 
 export const Dimensions = ["668 X 740", "1200 X 720", "400 X 210"];
 

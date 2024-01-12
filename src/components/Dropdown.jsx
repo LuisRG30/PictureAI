@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Dropdown = ({ options, placeholder }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -17,7 +17,11 @@ const Dropdown = ({ options, placeholder }) => {
          rounded-3xl md:px-4 px-3 md:py-2 py-1 items-center w-full flex 
          justify-between"
       >
-        <span className="mr-2">
+        <span
+          className={`mr-2 ${
+            selectedOption === null ? "text-[#6B7280]" : "text-white"
+          }`}
+        >
           {selectedOption ? selectedOption : placeholder}
         </span>
         <img
@@ -28,8 +32,10 @@ const Dropdown = ({ options, placeholder }) => {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute top-full left-0 w-full
-         bg-black rounded-md mt-1 z-10">
+        <div
+          className="absolute top-full left-0 w-full
+       bg-black rounded-md mt-1 z-10"
+        >
           {options.map((option) => (
             <div
               key={option}

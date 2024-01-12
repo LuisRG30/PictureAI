@@ -25,7 +25,8 @@ const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
           <Dropdown options={Dimensions} placeholder={"Size"} />
         </div>
       </div>
-      <div className="flex flex-row gap-2 w-full">
+      <div className="flex flex-row gap-2 w-full overflow-auto
+       scroll-container md:max-w-[420px]">
         {GenresData.map((dim, i) => (
           <Button text={dim} key={i}/>
         ))}

@@ -17,7 +17,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
         reader.readAsDataURL(file);
       } else {
         // Handle invalid file type
-        alert('Invalid file type. Please upload an image or video.');
+        alert('Invalid file type. Please upload an image.');
       }
     }
   };

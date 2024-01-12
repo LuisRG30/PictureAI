@@ -129,6 +129,10 @@
     background: linear-gradient(180deg, #CA16F0 0%, #270874 100%);
   }
 
+  .bg-black-purple {
+    background: linear-gradient(180deg, rgba(203, 88, 250, 0.00) 0%, #8348F0 100%);
+  }
+
   .sub-text {
     color: gray;
   }
@@ -139,4 +143,43 @@
   h1{
     font-size: 21px;
   }
+/* Container with margin and custom scrollbar */
+.scroll-container {
+  padding: 10px; /* Add right margin to the container */
+  overflow-y: scroll; /* Enable vertical scrollbar */
+}
+
+/* Define scrollbar track */
+.scroll-container::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+  height: 9px;
+}
+
+/* Handle the scrollbar track */
+.scroll-container::-webkit-scrollbar-track {
+  background-color: #f0f0f0; /* Set the background color of the track */
+  border-radius: 10px; /* Set rounded borders */
+}
+
+/* Handle when the user hovers over the scrollbar track */
+.scroll-container::-webkit-scrollbar-track:hover {
+  background-color: #e0e0e0; /* Set a slightly different color on hover */
+}
+
+/* Handle the scrollbar handle */
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Set the color of the scrollbar handle */
+  border-radius: 10px; /* Set rounded borders */
+}
+
+/* Handle when the user hovers over the scrollbar handle */
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* Set a slightly different color on hover */
+}
+
+/* Handle the scrollbar corner (between vertical and horizontal scrollbar) */
+.scroll-container::-webkit-scrollbar-corner {
+  background-color: transparent; /* Set the background color of the corner */
+}
+
 }
