@@ -35,7 +35,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
           style={{ background: 'rgba(222, 41, 226, 0.08)' }}
         >
           {preview ? (
-            <img src={preview} alt="Preview" className="max-h-full max-w-full w-full" />
+            <img src={preview} alt="Preview" className="max-h-full max-w-full w-full object-contain" />
           ) : (
             <p className="text-[20px] text-center">Preview</p>
           )}

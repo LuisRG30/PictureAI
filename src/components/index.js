@@ -6,3 +6,4 @@ export * from "./ImageGallery";
 export * from "./Dropdown";
 export * from "./UploadImage";
 export * from "./Button";
+export * from "./Modal";

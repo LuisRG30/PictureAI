@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
+
   return (
     <div className={`xPaddings py-4 relative gradient-01`}>
       <div className="absolulte gradient-03 inset-0" />
@@ -15,11 +18,23 @@ const Header = () => {
         </div>
         <div className="flex gap-5">
           <Link href="/" className="flex items-center">
-            <p className="">Home</p>
+            <p
+              className={`${
+                pathname === "/" ? "text-white" : "text-gray-500"
+              }`}
+            >
+              Home
+            </p>
           </Link>
           <Link href="/products" className="flex items-center">
             <div className="flex flex-row gap-0.5 cursor-pointer items-center">
-              <p className="text-gray-400">Products</p>
+              <p
+                className={`${
+                  pathname === "/products" ? "text-white" : "text-gray-500"
+                }`}
+              >
+                Products
+              </p>
               <img
                 src="/assets/images/down-arrow.png"
                 alt="arrow-icon"

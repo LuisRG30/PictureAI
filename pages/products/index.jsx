@@ -1,5 +1,6 @@
-import { Button, ImageGallery, UploadImage } from "@/src/components";
-import { Genres } from "@/src/sections";
+import { Button, ImageGallery, UploadImage, Modal } from "@/src/components";
+import { Genres, NotifyModal } from "@/src/sections";
+import TermsModal from "@/src/sections/TermsModal";
 import {
   selectFilters,
   selectUploadedImage,
@@ -7,20 +8,45 @@ import {
   removeFilteredImagesById,
   setFilteredImages,
 } from "@/src/store/imagesSlice";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const { filters, uploadImage, filteredImages } = useSelector(
+  const router = useRouter()
+  const { filters, uploadImage, filteredImages, error } = useSelector(
     (state) => state.images
   );
   const [isSelectedFilter, setIsSelectedFilter] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState([]);
+  const [isOpenImageModal, setIsOpenImageModal] = useState(false);
+  const [isOpenTermsModal, setIsOpenTermsModal] = useState(false);
   const stylesSelectionBox = {
     //width:'45%',
     background: "rgba(222, 41, 226, 0.08)",
   };
+
+  const handleOpenImageModal = () => {
+    setIsOpenImageModal(true);
+  };
+
+  const handleCloseImageModal = () => {
+    setIsOpenImageModal(false);
+  };
+
+  const handleOpenTermsModal = () => {
+    console.log("termsModal")
+    setIsOpenTermsModal(true);
+  }
+
+  const handleCloseTermsModal = () => {
+    setIsOpenTermsModal(false);
+  }
+
+  const handleAgreePress = () => {
+    router.push('/checkout', { scroll: false });
+  }
 
   useEffect(() => {
     setIsSelectedFilter(
@@ -63,6 +89,7 @@ const Products = () => {
                   image={uploadImage}
                   setUploadedImage={(img) => {
                     dispatch(setUploadedImage(img));
+                    handleOpenImageModal();
                   }}
                   clearUploadedImage={() => {
                     dispatch(setUploadedImage(null));
@@ -86,7 +113,9 @@ const Products = () => {
                       minWidth: "100%",
                       border: "1px solid white",
                     }}
-                    onClick={() =>{}}
+                    onClick={() => {
+                      setIsOpenImageModal(true);
+                    }}
                   />
                 </div>
               </div>
@@ -94,6 +123,17 @@ const Products = () => {
           </div>
         )}
       </div>
+      <NotifyModal
+        isOpen={isOpenImageModal}
+        onClose={handleCloseImageModal}
+        error={error}
+        OnSuccess={handleOpenTermsModal}
+      />
+      <TermsModal 
+        isOpen={isOpenTermsModal}
+        onClose={handleCloseTermsModal}
+        onAgree={handleAgreePress}
+      />
     </div>
   );
 };

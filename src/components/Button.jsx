@@ -1,4 +1,5 @@
-const Button = ({ text, image, styles, isSelected = false, classes = "" }) => {
+const Button = ({ text, image, styles, isSelected = false,
+   classes = "",textClasses="", onClick }) => {
   return (
     <button
       className={`cursor-pointer md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
@@ -7,12 +8,14 @@ const Button = ({ text, image, styles, isSelected = false, classes = "" }) => {
             isSelected
               ? "bg-[#DE29E233] hover:bg-[#DE29E244]"
               : "hover:bg-[#DE29E233]"
-          } ${classes}`}
+          } ${classes}`
+      }
+      onClick={onClick}
       style={styles}
     >
       <p
-        className="md:text-[15px] text-[13px] 
-        whitespace-nowrap overflow-ellipsis"
+        className={`md:text-[15px] text-[13px] 
+        whitespace-nowrap overflow-ellipsis ${textClasses}`}
       >
         {text}
       </p>
