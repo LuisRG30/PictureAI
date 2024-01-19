@@ -6,22 +6,28 @@ const ImageGallery = ({
   isSelectedImage,
   isSelectionDisabled,
   isRemoveEnabled,
-  handleRemoveImage
+  handleRemoveImage,
+  isFilterBar,
 }) => {
-  const selectedStyles = "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 rounded-md mb-3 relative cursor-pointer"
-  const notSelectedStyles = "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/5 rounded-md mb-3 relative cursor-pointer"
+  const selectedStyles =
+    "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/4 lg:w-1/5 xl:w-1/6 rounded-md mb-3 relative cursor-pointer";
+  const notSelectedStyles =
+    "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/5 rounded-md mb-3 relative cursor-pointer";
   return (
     <>
       {!isRemoveEnabled ? (
-        <div className="flex flex-wrap justify-center w-full gap-4">
+        <div className="flex flex-wrap justify-center w-full gap-4 relative">
           {Array.isArray(ImageSources) &&
             ImageSources.map((img, i) => (
               <div
-                className={!isSelectedImage ? selectedStyles : notSelectedStyles}
+                className={
+                  !isFilterBar &&
+                  (!isSelectedImage ? selectedStyles : notSelectedStyles)
+                }
                 onClick={() => handleImageSelection(img?.id)}
                 key={i}
               >
-                {img.isChecked && !isSelectionDisabled && (
+                {!isFilterBar && img.isChecked && !isSelectionDisabled && (
                   <div
                     className="w-[20px] h-[20px] bg-gray-300 absolute right-4
                      top-4 rounded-xl bg-purple-gradient flex items-center justify-center"
@@ -43,10 +49,13 @@ const ImageGallery = ({
                 )}
                 <img
                   key={i}
-                  className={`max-h-[270px] sm:h-[150px] h-[120px]
-                
-                  ${isSelectedImage ? "md:h-[82px]" : "md:h-[220px]"}  w-full
-                  
+                  className={`${
+                    isFilterBar
+                      ? "md:w-[121px] md:h-[112px] h-[100px] w-[100px]"
+                      : `max-h-[270px] sm:h-[150px] h-[120px] ${
+                          isSelectedImage ? "md:h-[82px]" : "md:h-[220px]"
+                        }  w-full`
+                  } 
                   `}
                   src={`assets/images/${img.source}`}
                   alt={`Image ${i}`}
@@ -68,7 +77,9 @@ const ImageGallery = ({
                 alt={`img-${index}`}
                 style={{ top: "5px", right: "5px" }}
                 className="absolute w-[12px] h-[12px] cursor-pointer"
-                onClick={() => {handleRemoveImage(filter?.id)}}
+                onClick={() => {
+                  handleRemoveImage(filter?.id);
+                }}
               />
               <img
                 src={`assets/images/${filter.source}`}

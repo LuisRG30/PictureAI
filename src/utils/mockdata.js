@@ -1,4 +1,5 @@
 export const GenresData = [
+  "Filters",
   "Abstract",
   "Art",
   "Cartoon",
@@ -6,7 +7,8 @@ export const GenresData = [
   "Cyberpunk",
   "Sci-fi",
 ];
-
+export const Gendar = ["Male", "Female"];
+export const Tiers = ["Common", "Uncommon", "Epic", "Rare", "Legendry"];
 export const Dimensions = ["668 X 740", "1200 X 720", "400 X 210"];
 
 export const ImageSources = [

@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
-export const Modal = ({ isOpen, onClose, children }) => {
+export const Modal = ({ isOpen, onClose, children, mainClass }) => {
   const modalRef = useRef();
 
   useEffect(() => {
     const handleBodyOverflow = () => {
-      document.body.style.overflowY = isOpen ? 'hidden' : 'auto';
+      document.body.style.overflowY = isOpen ? "hidden" : "auto";
     };
 
     const handleClickOutside = (event) => {
@@ -16,10 +16,10 @@ export const Modal = ({ isOpen, onClose, children }) => {
 
     handleBodyOverflow();
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
       handleBodyOverflow(); // Revert body overflow on component unmount
     };
   }, [onClose, isOpen]);
@@ -27,12 +27,17 @@ export const Modal = ({ isOpen, onClose, children }) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 overflow-y-hidden">
-          <div className="absolute w-full h-full bg-gray-800 bg-opacity-50" onClick={onClose}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50 overflow-y-hidden ">
+          <div
+            className="absolute w-full h-full bg-gray-800 bg-opacity-50"
+            onClick={onClose}
+          ></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
             <div
               ref={modalRef}
-              className="bg-white p-6 rounded shadow-md sm:min-w-96 w-full h-80vh max-h-full overflow-y-auto z-10"
+              className={`${
+                mainClass ? mainClass : "bg-white"
+              } p-6 rounded shadow-md sm:min-w-96 w-full h-80vh max-h-full overflow-y-auto z-10`}
             >
               <button
                 className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
