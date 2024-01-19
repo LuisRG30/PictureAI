@@ -3,10 +3,16 @@ import { Dimensions, GenresData } from "../utils/mockdata";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/navigation'
 import { toggleFilter, clearFilters } from "../store/imagesSlice";
+import { useEffect, useState } from "react";
 
-const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
+const Genres = () => {
   const dispatch = useDispatch();
+  const [isSelectedFilter, setIsSelectedFilter] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState([]);
   const router = useRouter()
+  const { filters, uploadImage, filteredImages, error } = useSelector(
+    (state) => state.images
+  );
   const handleToggleFilter = (id) => {
     dispatch(toggleFilter({ id }));
   };
@@ -14,6 +20,16 @@ const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
   const handleClearFilters = () => {
     dispatch(clearFilters());
   };
+
+  useEffect(() => {
+    setIsSelectedFilter(
+      Object.values(filters).some((value) => value.isChecked === true)
+    );
+    const newSelectedFilters = Object.keys(filters)
+      .filter((key) => filters[key].isChecked)
+      .map((key) => filters[key]);
+    setSelectedFilters(newSelectedFilters);
+  }, [filters]);
 
   return (
     <div className="flex flex-col w-full py-4 gap-4">
@@ -28,7 +44,7 @@ const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
         </div>
       </div>
       <div className={`flex flex-row gap-2 w-full overflow-auto
-       scroll-container ${isSelectedFilter ? "md:max-w-[420px]":"md:max-w-full"} `}>
+       scroll-container max-w-full`}>
         {GenresData.map((dim, i) => (
           <Button text={dim} key={i}/>
         ))}
@@ -37,7 +53,7 @@ const Genres = ({ filters, isSelectedFilter, selectedFilters }) => {
       <ImageGallery
         ImageSources={filters}
         handleImageSelection={handleToggleFilter}
-        isSelectedImage={isSelectedFilter}
+        isSelectedImage={false}
       />
 
       {isSelectedFilter && (

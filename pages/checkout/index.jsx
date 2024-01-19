@@ -23,7 +23,7 @@ const CheckoutPage = () => {
           MX$100.00
         </h1>
         {[0, 1, 2].map((item) => (
-          <div className="flex flex-row justify-between items-center">
+          <div key={item} className="flex flex-row justify-between items-center">
             <div className="flex gap-6 items-center">
               <img
                 src="/assets/images/img.png"
