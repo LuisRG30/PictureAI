@@ -29,6 +29,9 @@ export default async function handler(req, res) {
       });
       const products  = JSON.parse(data.fields.products);
       const image = data.files.image;
+      const gender = data.fields.gender;
+      const hairColors = JSON.parse(data.fields.hairColors);
+      const varyFacialHair = data.fields.varyFacialHair;
       const session = await stripe.checkout.sessions.create({
         line_items: products.map(product => {
           return {
@@ -48,7 +51,7 @@ export default async function handler(req, res) {
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
         Body: createReadStream(image[0].filepath),
       });
-      const dynamo = new Dynamo();
+      const dynamo = new Dynamo(process.env.AWS_REGION)
       const params = {
         TableName: 'customers',
         Item: {
@@ -61,7 +64,17 @@ export default async function handler(req, res) {
             })
           },
           'session': { S: session.id },
-          'preferences': { M: {} },
+          'preferences': { M: {
+            'gender': { S: gender },
+            'hairColors': {
+              L: hairColors.map(hairColor => {
+                return {
+                  S: hairColor
+                }
+              })
+            },
+            'varyFacialHair': { BOOL: varyFacialHair }
+          }},
         }
       };
       dynamo.put(params);
