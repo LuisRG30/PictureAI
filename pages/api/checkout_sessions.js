@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       const image = data.files.image;
       const gender = data.fields.gender;
       const hairColors = JSON.parse(data.fields.hairColors);
-      const varyFacialHair = data.fields.varyFacialHair;
+      const varyFacialHair = JSON.parse(data.fields.varyFacialHair);
       const session = await stripe.checkout.sessions.create({
         line_items: products.map(product => {
           return {
@@ -44,14 +44,17 @@ export default async function handler(req, res) {
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
-      const s3 = new S3();
       
+      const s3 = new S3();
       await s3.upload({
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
         Body: createReadStream(image[0].filepath),
       });
       const dynamo = new Dynamo(process.env.AWS_REGION)
+      console.log('HERE IS THE GENDER', gender)
+      console.log('HERE ARE THE HAIR COLORS', hairColors)
+      console.log('HERE IS THE VARY FACIAL HAIR', varyFacialHair)
       const params = {
         TableName: 'customers',
         Item: {
@@ -64,17 +67,7 @@ export default async function handler(req, res) {
             })
           },
           'session': { S: session.id },
-          'preferences': { M: {
-            'gender': { S: gender },
-            'hairColors': {
-              L: hairColors.map(hairColor => {
-                return {
-                  S: hairColor
-                }
-              })
-            },
-            'varyFacialHair': { BOOL: varyFacialHair }
-          }},
+          'preferences': { M: {}},
         }
       };
       dynamo.put(params);

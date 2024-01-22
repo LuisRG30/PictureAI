@@ -80,7 +80,7 @@ export default function PreviewPage() {
     formData.append('products', JSON.stringify(selectedProducts));
     formData.append('gender', gender);
     formData.append('hairColors', JSON.stringify(hairColors));
-    formData.append('varyFacialHair', varyFacialHair);
+    formData.append('varyFacialHair', JSON.stringify(varyFacialHair));
     const response = await axios.post('/api/checkout_sessions', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -168,7 +168,7 @@ export default function PreviewPage() {
       </div>
       <div>
         <p>Would you like us to create pictures with varied facial hair styles?</p>
-        <input type='radio' id='yes' name='facialHair' value={true} onClicks={() => setVaryFacialHair(true)} />
+        <input type='radio' id='yes' name='facialHair' value={true} onClick={() => setVaryFacialHair(true)} />
         <label for='yes'>Yes</label>
         <input type='radio' id='no' name='facialHair' value={false} onClick={() => setVaryFacialHair(false)} />
         <label for='no'>No</label>
