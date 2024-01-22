@@ -142,7 +142,7 @@ const Genres = () => {
             style={{
               background: "linear-gradient(90deg, #E85EFF 0%, #6843EC 108.39%)",
             }}
-            onClick={() => router.push("/mystery-box", { scroll: false })}
+            onClick={() => router.push("/preview", { scroll: false })}
           >
             <p className="text-[18px] font-bold font-san">Generate</p>
           </button>
