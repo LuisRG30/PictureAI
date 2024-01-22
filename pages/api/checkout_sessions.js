@@ -1,4 +1,6 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2020-08-27',
+});
 
 import { Formidable } from 'formidable';
 
@@ -28,10 +30,10 @@ export default async function handler(req, res) {
         }) 
       });
       const products  = JSON.parse(data.fields.products);
-      const image = data.files.image;
       const gender = data.fields.gender;
       const hairColors = JSON.parse(data.fields.hairColors);
       const varyFacialHair = JSON.parse(data.fields.varyFacialHair);
+      const image = data.files.image;
       const session = await stripe.checkout.sessions.create({
         line_items: products.map(product => {
           return {
@@ -44,17 +46,15 @@ export default async function handler(req, res) {
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
-      
       const s3 = new S3();
+      
       await s3.upload({
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
         Body: createReadStream(image[0].filepath),
       });
-      const dynamo = new Dynamo(process.env.AWS_REGION)
-      console.log('HERE IS THE GENDER', gender)
-      console.log('HERE ARE THE HAIR COLORS', hairColors)
-      console.log('HERE IS THE VARY FACIAL HAIR', varyFacialHair)
+      console.log(session.payment_intent)
+      const dynamo = new Dynamo();
       const params = {
         TableName: 'customers',
         Item: {
@@ -67,7 +67,13 @@ export default async function handler(req, res) {
             })
           },
           'session': { S: session.id },
-          'preferences': { M: {}},
+          'preferences': { M: {
+            'gender': { S:gender[0] },
+            'hairColors': { L: hairColors.map(hairColor => {
+              return { S: hairColor }
+            })},
+            'varyFacialHair': { BOOL: varyFacialHair }
+          }},
         }
       };
       dynamo.put(params);
