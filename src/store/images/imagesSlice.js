@@ -1,13 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ImageSources } from '../utils/mockdata';
+import { fetchProducts } from './imagesActions';
 
 const initialState = {
-  filters: ImageSources,
+  filters: [],
+  selectedFilters:[],
   uploadedImage: null,
-  filteredImages: ImageSources,
+  filteredImages: [],
   isLoading: false,
   error: false,
-  genre: "Abstract"
+  genre: 'Abstract',
+  gender: null,
+  tier: [],
+  size: '1280 X 640',
+  products: [],
 };
 
 const imagesSlice = createSlice({
@@ -18,12 +23,12 @@ const imagesSlice = createSlice({
       const { id } = action.payload;
       const filter = state.filters.find((filter) => filter.id === id);
       if (filter) {
-        filter.isChecked = !filter.isChecked;
+        filter.selected = !filter.selected;
       }
     },
     clearFilters: (state) => {
       state.filters.forEach((filter) => {
-        filter.isChecked = false;
+        filter.selected = false;
       });
     },
     setUploadedImage: (state, action) => {
@@ -41,6 +46,15 @@ const imagesSlice = createSlice({
     setGenre: (state, action) => {
       state.genre = action.payload;
     },
+    setGender: (state, action) => {
+      state.gender = action.payload;
+    },
+    setSize: (state, action) => {
+      state.size = action.payload;
+    },
+    setTier: (state, action) => {
+      state.tier = action.payload;
+    },
     setFilteredImages: (state, action) => {
       state.filteredImages = action.payload;
     },
@@ -50,6 +64,22 @@ const imagesSlice = createSlice({
         (image) => image.id !== idToRemove
       );
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = false;
+        state.filters = action.payload;
+
+      })
+      .addCase(fetchProducts.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
+      });
   },
 });
 

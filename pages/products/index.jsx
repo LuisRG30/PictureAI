@@ -7,7 +7,8 @@ import {
   setUploadedImage,
   removeFilteredImagesById,
   setFilteredImages,
-} from "@/src/store/imagesSlice";
+} from "@/src/store/images/imagesSlice";
+import { fetchProducts } from '@/src/store/images/imagesActions';
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,17 @@ const Products = () => {
     //width:'45%',
     background: "rgba(222, 41, 226, 0.08)",
   };
+  const getProducts = async () => {
+    try {
+      await dispatch(fetchProducts());
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  },[])
 
   const handleOpenImageModal = () => {
     setIsOpenImageModal(true);

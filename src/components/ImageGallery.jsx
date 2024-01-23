@@ -30,7 +30,7 @@ const ImageGallery = ({
                 onClick={() => handleImageSelection(img?.id)}
                 key={i}
               >
-                {!isFilterBar && img.isChecked && !isSelectionDisabled && (
+                {!isFilterBar && img.selected && !isSelectionDisabled && (
                   <div
                     className="w-[20px] h-[20px] bg-gray-300 absolute right-4
                      top-4 rounded-xl bg-purple-gradient flex items-center justify-center"

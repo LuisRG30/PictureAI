@@ -5,6 +5,7 @@ import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 
 import {ServiceCard} from '../src/components';
+
 import { CreateImages } from '@/src/sections';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -152,6 +153,8 @@ export default function PreviewPage() {
     //   </style>
     // </div>
     // </div>
+
+
     <>
       <CreateImages />
     </>

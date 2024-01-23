@@ -2,7 +2,7 @@ import { Button, Dropdown, ImageGallery, Modal } from "../components";
 import { Dimensions, GenresData, Gendar, Tiers } from "../utils/mockdata";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { toggleFilter, clearFilters } from "../store/imagesSlice";
+import { toggleFilter, clearFilters } from "../store/images/imagesSlice";
 import { useEffect, useState } from "react";
 import FiltersSidebar from "../components/FiltersSidebar";
 
@@ -37,14 +37,14 @@ const Genres = () => {
   };
   useEffect(() => {
     setIsSelectedFilter(
-      Object.values(filters).some((value) => value.isChecked === true)
+      Object.values(filters).some((value) => value.selected === true)
     );
     const newSelectedFilters = Object.keys(filters)
-      .filter((key) => filters[key].isChecked)
+      .filter((key) => filters[key].selected)
       .map((key) => filters[key]);
     setSelectedFilters(newSelectedFilters);
   }, [filters]);
-  const shouldRenderModal = window.matchMedia("(max-width: 767px)").matches;
+  const shouldRenderModal = typeof window !== 'undefined' && window.matchMedia("(max-width: 767px)").matches;
 
   return (
     <div className="flex flex-col w-full py-4 gap-4">

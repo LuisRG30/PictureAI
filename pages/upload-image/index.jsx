@@ -7,7 +7,7 @@ import {
   setUploadedImage,
   removeFilteredImagesById,
   setFilteredImages,
-} from "@/src/store/imagesSlice";
+} from "@/src/store/images/imagesSlice";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const UploadImagePage = () => {
 
   useEffect(() => {
     const newSelectedFilters = Object.keys(filters)
-      .filter((key) => filters[key].isChecked)
+      .filter((key) => filters[key].selected)
       .map((key) => filters[key]);
     setSelectedFilters(newSelectedFilters);
 

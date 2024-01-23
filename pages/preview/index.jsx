@@ -9,7 +9,7 @@ export default function Preview() {
   const router = useRouter();
   useEffect(() => {
     const newSelectedFilters = Object.keys(filters)
-      .filter((key) => filters[key].isChecked)
+      .filter((key) => filters[key].selected)
       .map((key) => filters[key]);
     setSelectedFilters(newSelectedFilters);
   }, [filters]);
