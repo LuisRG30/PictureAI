@@ -2,7 +2,7 @@ import { Button, Dropdown, ImageGallery, Modal } from "../components";
 import { Dimensions, GenresData, Gendar, Tiers } from "../utils/mockdata";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { toggleFilter, clearFilters } from "../store/images/imagesSlice";
+import { toggleFilter, clearFilters, setTiers, setGenders, setGenres } from "../store/images/imagesSlice";
 import { useEffect, useState } from "react";
 import FiltersSidebar from "../components/FiltersSidebar";
 
@@ -14,7 +14,8 @@ const Genres = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedTiers, setSelectedTiers] = useState([]);
   const router = useRouter();
-  const { filters, uploadImage, filteredImages, error } = useSelector(
+  const { filters, uploadImage, filteredImages, error, 
+    genres, tiers, genders, sizes } = useSelector(
     (state) => state.images
   );
   const handleToggleFilter = (id) => {
@@ -24,17 +25,38 @@ const Genres = () => {
   const handleClearFilters = () => {
     dispatch(clearFilters());
   };
-  const handleSelectedTier = (selectedTier) => {
-    setSelectedTiers((prevSelectedTiers) => {
-      // If the tier is already selected, remove it
-      if (prevSelectedTiers.includes(selectedTier)) {
-        return prevSelectedTiers.filter((tier) => tier !== selectedTier);
-      } else {
-        // If not selected, add it
-        return [...prevSelectedTiers, selectedTier];
+
+  const handleSelectedTier = (tier) => {
+    const updatedTiers = tiers.map(element => {
+      if (element.value === tier.value) {
+        return { ...element, selected:  !element.selected  };
       }
+      return element;
     });
+    console.log("tier", updatedTiers)
+    dispatch(setTiers(updatedTiers));
+  }
+
+  const handleSelectedGender = (gender) => {
+    const updatedGenders = genders.map((element) => {
+      if (element.value === gender.value) {
+        return { ...element, selected: !element.selected };
+      }
+      return element;
+    });
+    
+    dispatch(setGenders(updatedGenders));
+  }
+
+  const handleSelectedGenre = (genre) => {
+    const updatedGenres = genres.map((element) => ({
+      ...element,
+      selected: element.value === genre.value ? !element.selected : false,
+    }));
+  
+    dispatch(setGenres(updatedGenres));
   };
+
   useEffect(() => {
     setIsSelectedFilter(
       Object.values(filters).some((value) => value.selected === true)
@@ -51,25 +73,30 @@ const Genres = () => {
       <div className="flex md:flex-row flex-col md:gap-0 gap-2 w-full justify-between">
         <div className="flex flex-col gap-2 md:w-[60%] w-full">
           <p className="md:text-[20px]  font-bold">Genres</p>
-          <Dropdown options={GenresData} placeholder={"Select Genre..."} />
+          <Dropdown options={genres} placeholder={"Select Genre..."} />
         </div>
         <div className="flex flex-col gap-2 md:w-[38%] w-full">
           <p className="md:text-[20px] text-[16px] font-bold">Sizes</p>
-          <Dropdown options={Dimensions} placeholder={"Size"} />
+          <Dropdown options={sizes} placeholder={"Size"} />
         </div>
       </div>
       <div
         className={`flex flex-row gap-2 w-full overflow-auto
        scroll-container max-w-full`}
       >
-        {GenresData.map((dim, i) => (
+        {genres?.map((item, i) => (
           <Button
-            text={dim}
-            image={dim === "Filters" ? "/assets/svgs/filters.svg" : null}
+            text={item.value}
+            isSelected={item.selected}
+            image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
             key={i}
+            styles={{minWidth:160}}
             onClick={() => {
-              if (dim === "Filters") {
+              if (item.value === "Filters") {
                 setOpenModal(!openModal);
+              }
+              else{
+                handleSelectedGenre(item)
               }
             }}
           />
@@ -87,23 +114,25 @@ const Genres = () => {
           >
             {" "}
             <FiltersSidebar
-              setGendarSelected={setGendarSelected}
-              gendarSelected={gendarSelected}
-              selectedTiers={selectedTiers}
-              handleSelectedTier={handleSelectedTier}
-              selectedFilters={selectedFilters}
-              handleToggleFilter={handleToggleFilter}
+                handleSelectedGender={handleSelectedGender}
+                genders={genders}
+                tiers={tiers}
+                handleSelectedTier={handleSelectedTier}
+                handleCloseFilter={() => {
+                  setOpenModal(!openModal);
+                }}
             />
           </Modal>
         ) : (
           openModal && (
             <FiltersSidebar
-              setGendarSelected={setGendarSelected}
-              gendarSelected={gendarSelected}
-              selectedTiers={selectedTiers}
-              handleSelectedTier={handleSelectedTier}
-              selectedFilters={selectedFilters}
-              handleToggleFilter={handleToggleFilter}
+            handleSelectedGender={handleSelectedGender}
+            genders={genders}
+            tiers={tiers}
+            handleSelectedTier={handleSelectedTier}
+            handleCloseFilter={() => {
+              setOpenModal(!openModal);
+            }}
             />
           )
         )}

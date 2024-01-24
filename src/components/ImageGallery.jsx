@@ -60,7 +60,7 @@ const ImageGallery = ({
                         }  w-full`
                   } 
                   `}
-                  src={`assets/images/${img.source}`}
+                  src={`${img.source}`}
                   alt={`Image ${i}`}
                 />
               </div>

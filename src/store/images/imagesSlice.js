@@ -8,10 +8,14 @@ const initialState = {
   filteredImages: [],
   isLoading: false,
   error: false,
-  genre: 'Abstract',
-  gender: null,
-  tier: [],
-  size: '1280 X 640',
+  genres: null,
+  genders: null,
+  tiers: null,
+  sizes: [
+    {value:"668 X 740", selected: true}, 
+    {value:"1200 X 720", selected:false}, 
+    {value:"400 X 210",selected: false}
+  ],
   products: [],
 };
 
@@ -43,17 +47,17 @@ const imagesSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
-    setGenre: (state, action) => {
-      state.genre = action.payload;
+    setGenres: (state, action) => {
+      state.genres = action.payload;
     },
-    setGender: (state, action) => {
-      state.gender = action.payload;
+    setGenders: (state, action) => {
+      state.genders = action.payload;
     },
     setSize: (state, action) => {
       state.size = action.payload;
     },
-    setTier: (state, action) => {
-      state.tier = action.payload;
+    setTiers: (state, action) => {
+      state.tiers = action.payload;
     },
     setFilteredImages: (state, action) => {
       state.filteredImages = action.payload;
@@ -64,6 +68,26 @@ const imagesSlice = createSlice({
         (image) => image.id !== idToRemove
       );
     },
+    updateMetadataArrays: (state) => {
+      const uniqueGenders = Array.from(new Set(state.products.map(product => product.metadata.gender)
+      .filter(gender => gender !== undefined && gender !== null)));
+      const uniqueTiers = Array.from(new Set(state.products.map(product => product.metadata.tier)
+      .filter(tier => tier !== undefined && tier !== null)));
+      const uniqueNames = Array.from(new Set(state.products.map(product => product.name)
+      .filter(name => name !== undefined && name !== null)));
+
+      state.genres = [{ value: 'Filters', selected: false }, 
+      ...uniqueNames.map(value => ({ value, selected: false }))];
+      state.genders = uniqueGenders.map(value => ({ value, selected: false }));
+      state.tiers = [
+        ...uniqueTiers.map(value => ({ value, selected: false }))
+      ];
+      state.filters = state.products.map(product => ({
+        source: product.images[0],
+        id: product.id,
+        selected: false,
+      }));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -73,8 +97,9 @@ const imagesSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = false;
-        state.filters = action.payload;
-
+        state.products = action.payload;
+        // Dispatch the action to update metadata arrays
+        imagesSlice.caseReducers.updateMetadataArrays(state);
       })
       .addCase(fetchProducts.rejected, (state) => {
         state.isLoading = false;
@@ -90,7 +115,10 @@ export const {
   clearUploadedImage,
   setLoading,
   setError,
-  setGenre,
+  setGenres,
+  setTiers,
+  setGenders,
+  setSize,
   setFilteredImages,
   removeFilteredImagesById
 } = imagesSlice.actions;
