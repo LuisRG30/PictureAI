@@ -1,4 +1,6 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2020-08-27',
+});
 
 import { Formidable } from 'formidable';
 
@@ -28,6 +30,9 @@ export default async function handler(req, res) {
         }) 
       });
       const products  = JSON.parse(data.fields.products);
+      const gender = data.fields.gender;
+      const hairColors = JSON.parse(data.fields.hairColors);
+      const varyFacialHair = JSON.parse(data.fields.varyFacialHair);
       const image = data.files.image;
       const session = await stripe.checkout.sessions.create({
         line_items: products.map(product => {
@@ -49,6 +54,7 @@ export default async function handler(req, res) {
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
         Body: createReadStream(image[0].filepath),
       });
+      console.log(session.payment_intent)
       const dynamo = new Dynamo();
       const params = {
         TableName: 'customers',
@@ -62,7 +68,13 @@ export default async function handler(req, res) {
             })
           },
           'session': { S: session.id },
-          'preferences': { M: {} },
+          'preferences': { M: {
+            'gender': { S:gender[0] },
+            'hairColors': { L: hairColors.map(hairColor => {
+              return { S: hairColor }
+            })},
+            'varyFacialHair': { BOOL: varyFacialHair }
+          }},
         }
       };
       dynamo.put(params);

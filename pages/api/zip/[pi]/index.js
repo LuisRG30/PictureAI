@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     //Get files from S3 and add to zip
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Prefix: `results/${pi}/`,
+        Prefix: `swapped/${pi}/`,
     }
 
     const data = await s3.listObjects(params);
