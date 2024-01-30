@@ -42,6 +42,7 @@ const FulfillmentPage = () => {
                     'Access-Control-Allow-Origin': '*',
                 },
                 mode: 'cors',
+                credentials: 'include',
             });
             
             //These are images from S3
