@@ -13,7 +13,7 @@ const FulfillmentPage = () => {
     const { pi } = router.query;
 
     const [images, setImages] = React.useState([]);
-
+    
 
     React.useEffect(() => {
         const getFullfilment = async () => {
@@ -32,29 +32,18 @@ const FulfillmentPage = () => {
 
 
     async function downloadAll() {
-        const zip = new JSZip();
-
-        for (const image of images) {
-            const imageUrl = image.url;
-            const response = await fetch(imageUrl, {
-                method: 'GET',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                },
-                mode: 'cors',
-                credentials: 'include',
-            });
-            
-            //These are images from S3
-            console.log(response);
-            const blob = await response.blob();
-            console.log(blob);
-            zip.file(image.Key, blob);
-        }
-
-        const content = zip.generateAsync({ type: 'blob' }).then(function (content) {
-            saveAs(content, `${pi}.zip`);
-        });
+        const response = await fetch(`/api/zip/${pi}`);
+        const data = await response.json();
+        const zips = data.zips;
+        const zip = zips[0];
+        
+        const link = document.createElement('a');
+        link.href = zip.url;
+        link.download = zip.Key;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
     }
 
     return (
