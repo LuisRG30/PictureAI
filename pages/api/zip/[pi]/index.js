@@ -17,30 +17,37 @@ export default async function handler(req, res) {
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename=${pi}.zip`);
     
-    //Get files from S3 and add to zip
+    //Get file from S3
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Prefix: `swapped/${pi}/`,
+        Prefix: `zips/${pi}/`,
     }
 
     const data = await s3.listObjects(params);
 
-    const images = data.Contents.map(image => {
-        return image.Key;
+    const images = data.Contents.map(zip => {
+        return {
+            Key: zip.Key,
+            LastModified: zip.LastModified
+        }
     });
 
-    images.forEach(image => {
-        const object = s3.getObject({
+    const imagesWithLinks = await Promise.all(images.map(async image => {
+        const params = {
             Bucket: process.env.AWS_S3_BUCKET_NAME,
-            Key: image,
-        });
-        const readStream = object.createReadStream();
-        zip.append(readStream, { name: image });
-    });
+            Key: image.Key,
+        }
+        const url = await s3.getSignedUrl('getObject', params);
+        const object = await s3.getObject(params);
+        return {
+            ...image,
+            url,
+            Metadata: object.Metadata
+        }
+    }));
 
-    zip.pipe(res);
 
-    zip.finalize();
+    res.status(200).json({ zips: imagesWithLinks });
 }
 
 
