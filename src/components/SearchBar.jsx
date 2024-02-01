@@ -5,6 +5,8 @@ const SearchBar = ({
   placeholder = "Search Here",
   isImage = true,
   onClick,
+  searchInput,
+  setSearchInput,
 }) => {
   const searchBarClasses = `relative bg-black rounded-full md:h-auto h-full overflow-hidden
    w-${width} gradient-border max-w-[100%] md:max-w-[460px]`;
@@ -15,7 +17,15 @@ const SearchBar = ({
 
   return (
     <div className={searchBarClasses}>
-      <input type="text" className={inputClasses} placeholder={placeholder} />
+      <input
+        type="text"
+        value={searchInput}
+        onChange={(e) => {
+          setSearchInput(e.target.value);
+        }}
+        className={inputClasses}
+        placeholder={placeholder}
+      />
       <div className={iconContainerClasses} onClick={onClick}>
         {isImage ? (
           <img
@@ -24,7 +34,7 @@ const SearchBar = ({
             className="cursor-pointer"
           />
         ) : (
-          <button className="cursor-pointer text-white">Search</button>
+          <button className="cursor-pointer text-white" onClick={onClick}>Search</button>
         )}
       </div>
     </div>

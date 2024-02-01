@@ -179,112 +179,114 @@ export default function PreviewPage() {
     // </div>
 
 
-    // <>
-    //   <CreateImages />
-    // </>
-    <div>
-    {products.map((product, index) => (
-      <div
-        key={product.id}
-        onClick={() => {
-          const updatedProducts = [...products];
-          updatedProducts[index].selected = !updatedProducts[index].selected;
-          setProducts(updatedProducts);
-        }}
-      >
-        <ServiceCard
-          key={product.id}
-          name={product.name}
-          image={product.images[0]}
-          selected={product.selected}
-        />
-      </div>
-    ))}
-    <hr />
-    <input
-      type="file"
-      name="photo"
-      onChange={event => {
-        const file = event.target.files[0];
-        setImage(file);
-      }}
-    />
-    <b>
-      {
-        faces === 1 ? 
-        'OK' : `There are ${faces} faces in this photo. Please upload a photo with only one face.`
-      }
-    </b>
-    <hr />
-    <h3>Preferences</h3>
-    <div>
-      <div>
-        <p>Choose a prefered gender</p>
-        <input type='radio' id='man' name='gender' value='man' onClick={() => setGender('man')} />
-        <label for='man'>Man</label>
-        <input type='radio' id='woman' name='gender' value='woman' onClick={() => setGender('woman')} />
-        <label for='woman'>Woman</label>
-        <input type='radio' id='non-binary' name='gender' value='uninon-binary' onClick={() => setGender('non-binary')} />
-        <label for='unisex'>Do not specify</label>
-      </div>
-      <div>
-        <p>Choose one or more of these hair colors</p>
-        <input type='checkbox' id='blonde' name='hair' value='blonde' onClick={() => toggleSelectHairColor('blonde')} />
-        <label for='blonde'>Blonde</label>
-        <input type='checkbox' id='brown' name='hair' value='brown' onClick={() => toggleSelectHairColor('brown')} />
-        <label for='brown'>Brown</label>
-        <input type='checkbox' id='black' name='hair' value='black' onClick={() => toggleSelectHairColor('black')} />
-        <label for='black'>Black</label>
-        <input type='checkbox' id='red' name='hair' value='red' onClick={() => toggleSelectHairColor('red')} />
-        <label for='red'>Red</label>
-        <input type='checkbox' id='grey' name='hair' value='grey' onClick={() => toggleSelectHairColor('grey')} />
-        <label for='grey'>Grey</label>
-        <input type='checkbox' id='white' name='hair' value='white' onClick={() => toggleSelectHairColor('white')} />
-        <label for='white'>White</label>
-      </div>
-      <div>
-        <p>Would you like us to create pictures with varied facial hair styles?</p>
-        <input type='radio' id='yes' name='facialHair' value={true} onClick={() => setVaryFacialHair(true)} />
-        <label for='yes'>Yes</label>
-        <input type='radio' id='no' name='facialHair' value={false} onClick={() => setVaryFacialHair(false)} />
-        <label for='no'>No</label>
-      </div>
-    </div>
-    <hr />
-    <div>
-      <section>
-        <button onClick={sendOrderInfo}>
-          Checkout
-        </button>
-      </section>
-      <style jsx>
-        {`
-          section {
-            background: #ffffff;
-            display: flex;
-            flex-direction: column;
-            width: 400px;
-            height: 112px;
-            border-radius: 6px;
-            justify-content: space-between;
-          }
-          button {
-            height: 36px;
-            background: #556cd6;
-            border-radius: 4px;
-            color: white;
-            border: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-          }
-          button:hover {
-            opacity: 0.8;
-          }
-        `}
-      </style>
-    </div>
-    </div>
+    <>
+      <CreateImages />
+    </>
+
+
+    // <div>
+    // {products.map((product, index) => (
+    //   <div
+    //     key={product.id}
+    //     onClick={() => {
+    //       const updatedProducts = [...products];
+    //       updatedProducts[index].selected = !updatedProducts[index].selected;
+    //       setProducts(updatedProducts);
+    //     }}
+    //   >
+    //     <ServiceCard
+    //       key={product.id}
+    //       name={product.name}
+    //       image={product.images[0]}
+    //       selected={product.selected}
+    //     />
+    //   </div>
+    // ))}
+    // <hr />
+    // <input
+    //   type="file"
+    //   name="photo"
+    //   onChange={event => {
+    //     const file = event.target.files[0];
+    //     setImage(file);
+    //   }}
+    // />
+    // <b>
+    //   {
+    //     faces === 1 ? 
+    //     'OK' : `There are ${faces} faces in this photo. Please upload a photo with only one face.`
+    //   }
+    // </b>
+    // <hr />
+    // <h3>Preferences</h3>
+    // <div>
+    //   <div>
+    //     <p>Choose a prefered gender</p>
+    //     <input type='radio' id='man' name='gender' value='man' onClick={() => setGender('man')} />
+    //     <label for='man'>Man</label>
+    //     <input type='radio' id='woman' name='gender' value='woman' onClick={() => setGender('woman')} />
+    //     <label for='woman'>Woman</label>
+    //     <input type='radio' id='non-binary' name='gender' value='uninon-binary' onClick={() => setGender('non-binary')} />
+    //     <label for='unisex'>Do not specify</label>
+    //   </div>
+    //   <div>
+    //     <p>Choose one or more of these hair colors</p>
+    //     <input type='checkbox' id='blonde' name='hair' value='blonde' onClick={() => toggleSelectHairColor('blonde')} />
+    //     <label for='blonde'>Blonde</label>
+    //     <input type='checkbox' id='brown' name='hair' value='brown' onClick={() => toggleSelectHairColor('brown')} />
+    //     <label for='brown'>Brown</label>
+    //     <input type='checkbox' id='black' name='hair' value='black' onClick={() => toggleSelectHairColor('black')} />
+    //     <label for='black'>Black</label>
+    //     <input type='checkbox' id='red' name='hair' value='red' onClick={() => toggleSelectHairColor('red')} />
+    //     <label for='red'>Red</label>
+    //     <input type='checkbox' id='grey' name='hair' value='grey' onClick={() => toggleSelectHairColor('grey')} />
+    //     <label for='grey'>Grey</label>
+    //     <input type='checkbox' id='white' name='hair' value='white' onClick={() => toggleSelectHairColor('white')} />
+    //     <label for='white'>White</label>
+    //   </div>
+    //   <div>
+    //     <p>Would you like us to create pictures with varied facial hair styles?</p>
+    //     <input type='radio' id='yes' name='facialHair' value={true} onClick={() => setVaryFacialHair(true)} />
+    //     <label for='yes'>Yes</label>
+    //     <input type='radio' id='no' name='facialHair' value={false} onClick={() => setVaryFacialHair(false)} />
+    //     <label for='no'>No</label>
+    //   </div>
+    // </div>
+    // <hr />
+    // <div>
+    //   <section>
+    //     <button onClick={sendOrderInfo}>
+    //       Checkout
+    //     </button>
+    //   </section>
+    //   <style jsx>
+    //     {`
+    //       section {
+    //         background: #ffffff;
+    //         display: flex;
+    //         flex-direction: column;
+    //         width: 400px;
+    //         height: 112px;
+    //         border-radius: 6px;
+    //         justify-content: space-between;
+    //       }
+    //       button {
+    //         height: 36px;
+    //         background: #556cd6;
+    //         border-radius: 4px;
+    //         color: white;
+    //         border: 0;
+    //         font-weight: 600;
+    //         cursor: pointer;
+    //         transition: all 0.2s ease;
+    //         box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    //       }
+    //       button:hover {
+    //         opacity: 0.8;
+    //       }
+    //     `}
+    //   </style>
+    // </div>
+    // </div>
   );
 }

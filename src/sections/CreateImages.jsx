@@ -1,7 +1,20 @@
 import Link from "next/link";
 import SearchBar from "../components/SearchBar";
+import { useState } from "react";
+import { useRouter } from 'next/router';
 
 const CreateImages = () => {
+  const [searchInput, setSearchInput] = useState("");
+  const router = useRouter();
+
+  const onSearchClick = () => {
+    if(searchInput.length > 0){
+      router.push('/products', {
+        search: searchInput,
+      });
+    }
+  };
+
   return (
     <div className={`xPaddings relative`}>
       <div className={`mx-auto flex justify-between gap-8 max-width`}>
@@ -31,7 +44,7 @@ const CreateImages = () => {
               </p>
             </div>
 
-            <SearchBar />
+            <SearchBar onClick={onSearchClick} searchInput={searchInput} setSearchInput={setSearchInput} />
 
             <div
               className="flex md:flex-row flex-col w-full md:h-[260px]

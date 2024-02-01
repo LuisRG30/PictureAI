@@ -7,4 +7,4 @@ export * from "./Dropdown";
 export * from "./UploadImage";
 export * from "./Button";
 export * from "./Modal";
-export * from "./Filter";
+export * from "./Loader";

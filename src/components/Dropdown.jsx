@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-const Dropdown = ({ options, placeholder }) => {
+const Dropdown = ({ options, placeholder, handleSelectedOption }) => {
   const [selectedOption, setSelectedOption] = 
   useState(options?.selected ? options.selected : false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleOptionClick = (option) => {
-    console.log("set", option)
     setSelectedOption(option);
     setIsDropdownOpen(false);
+    handleSelectedOption(option);
   };
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Dropdown = ({ options, placeholder }) => {
         setSelectedOption(opt.value);
       }
     })
-  },[])
+  },[options])
 
   return (
     <div className="relative inline-block">
@@ -44,9 +44,9 @@ const Dropdown = ({ options, placeholder }) => {
       {isDropdownOpen && (
         <div
           className="absolute top-full left-0 w-full
-       bg-black rounded-md mt-1 z-10"
+       bg-black rounded-md mt-1 z-10 max-h-[300px] overflow-auto"
         >
-          {options.map((option) => (
+          {options?.map((option) => (
             <div
               key={option.value}
               className="px-4 py-2 cursor-pointer

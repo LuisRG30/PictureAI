@@ -16,9 +16,11 @@ import { useDispatch, useSelector } from "react-redux";
 const Products = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const searchInput = router.query.search;
   const { error } = useSelector(
     (state) => state.images
   );
+  console.log("que", router.query)
   const [isOpenImageModal, setIsOpenImageModal] = useState(false);
   const [isOpenTermsModal, setIsOpenTermsModal] = useState(false);
   const stylesSelectionBox = {
@@ -61,7 +63,7 @@ const Products = () => {
     <div className={`${"xPaddings"} relative`}>
       <div className="mx-auto flex md:flex-row flex-col justify-between gap-2 max-width">
         <div className={`flex-none w-full`}>
-          <Genres />
+          <Genres searchValue={searchInput}/>
         </div>
       </div>
       <NotifyModal

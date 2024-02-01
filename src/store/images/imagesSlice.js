@@ -68,6 +68,32 @@ const imagesSlice = createSlice({
         (image) => image.id !== idToRemove
       );
     },
+    searchFilter: (state, action) => {
+
+    },
+    toogleGenre: (state, action) => {
+      const genreValue = action.payload.value || action.payload;
+      const genre = state.genres.find((g) => g.value === genreValue);
+      if (genre) {
+        genre.selected = !genre.selected;
+      }
+    },
+
+    toogleTier: (state, action) => {
+      const tierValue = action.payload.value;
+      const tier = state.tiers.find((t) => t.value === tierValue);
+      if (tier) {
+        tier.selected = !tier.selected;
+      }
+    },
+
+    toogleGender: (state, action) => {
+      const genderValue = action.payload.value;
+      const gender = state.genders.find((g) => g.value === genderValue);
+      if (gender) {
+        gender.selected = !gender.selected;
+      }
+    },
     updateMetadataArrays: (state) => {
       const uniqueGenders = Array.from(new Set(state.products.map(product => product.metadata.gender)
       .filter(gender => gender !== undefined && gender !== null)));
@@ -76,8 +102,7 @@ const imagesSlice = createSlice({
       const uniqueNames = Array.from(new Set(state.products.map(product => product.name)
       .filter(name => name !== undefined && name !== null)));
 
-      state.genres = [{ value: 'Filters', selected: false }, 
-      ...uniqueNames.map(value => ({ value, selected: false }))];
+      state.genres = uniqueNames.map(value => ({ value, selected: false }));
       state.genders = uniqueGenders.map(value => ({ value, selected: false }));
       state.tiers = [
         ...uniqueTiers.map(value => ({ value, selected: false }))
@@ -85,6 +110,9 @@ const imagesSlice = createSlice({
       state.filters = state.products.map(product => ({
         source: product.images[0],
         id: product.id,
+        genre: product.name,
+        gender: product.metadata.gender,
+        tier: product.metadata.tier,
         selected: false,
       }));
     },
@@ -120,7 +148,10 @@ export const {
   setGenders,
   setSize,
   setFilteredImages,
-  removeFilteredImagesById
+  removeFilteredImagesById,
+  toogleGender,
+  toogleGenre,
+  toogleTier
 } = imagesSlice.actions;
 
 export const selectFilters = (state) => state.images.filters;

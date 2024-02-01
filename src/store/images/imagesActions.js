@@ -4,7 +4,7 @@ import { axiosFaceInstance, axiosInstance } from '@/pages/api/axios';
 export const fetchProducts = createAsyncThunk('images/fetchProducts', async () => {
   try {
     const response = await axiosInstance.get('/api/products');
-    const products = response.data.data;
+    const products = response.data;
     for (const product of products) {
       product.selected = false;
     }

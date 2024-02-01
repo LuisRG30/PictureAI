@@ -1,23 +1,38 @@
-import { Button, Dropdown, ImageGallery, Modal } from "../components";
+import { Button, Dropdown, ImageGallery, Loader, Modal } from "../components";
 import { Dimensions, GenresData, Gendar, Tiers } from "../utils/mockdata";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { toggleFilter, clearFilters, setTiers, setGenders, setGenres } from "../store/images/imagesSlice";
+import {
+  toggleFilter,
+  clearFilters,
+  setTiers,
+  setGenders,
+  setGenres,
+  toogleGender,
+  toogleTier,
+  toogleGenre,
+  setLoading,
+} from "../store/images/imagesSlice";
 import { useEffect, useState } from "react";
 import FiltersSidebar from "../components/FiltersSidebar";
+import { getSearchedFilters } from "../utils/filtersHelper";
 
-const Genres = () => {
+const Genres = ({searchValue}) => {
   const dispatch = useDispatch();
-  const [isSelectedFilter, setIsSelectedFilter] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState([]);
-  const [gendarSelected, setGendarSelected] = useState("Male");
   const [openModal, setOpenModal] = useState(false);
-  const [selectedTiers, setSelectedTiers] = useState([]);
+  const [searchedFilters, setSearchedFilters] = useState([]);
   const router = useRouter();
-  const { filters, uploadImage, filteredImages, error, 
-    genres, tiers, genders, sizes } = useSelector(
-    (state) => state.images
-  );
+  const {
+    filters,
+    uploadImage,
+    filteredImages,
+    error,
+    genres,
+    tiers,
+    genders,
+    sizes,
+    isLoading,
+  } = useSelector((state) => state.images);
   const handleToggleFilter = (id) => {
     dispatch(toggleFilter({ id }));
   };
@@ -27,79 +42,81 @@ const Genres = () => {
   };
 
   const handleSelectedTier = (tier) => {
-    const updatedTiers = tiers.map(element => {
-      if (element.value === tier.value) {
-        return { ...element, selected:  !element.selected  };
-      }
-      return element;
-    });
-    console.log("tier", updatedTiers)
-    dispatch(setTiers(updatedTiers));
-  }
+    dispatch(toogleTier(tier));
+  };
 
   const handleSelectedGender = (gender) => {
-    const updatedGenders = genders.map((element) => {
-      if (element.value === gender.value) {
-        return { ...element, selected: !element.selected };
-      }
-      return element;
-    });
-    
-    dispatch(setGenders(updatedGenders));
-  }
+    dispatch(toogleGender(gender));
+  };
 
   const handleSelectedGenre = (genre) => {
-    const updatedGenres = genres.map((element) => ({
-      ...element,
-      selected: element.value === genre.value ? !element.selected : false,
-    }));
-  
-    dispatch(setGenres(updatedGenres));
+    dispatch(toogleGenre(genre));
   };
 
   useEffect(() => {
-    setIsSelectedFilter(
-      Object.values(filters).some((value) => value.selected === true)
-    );
-    const newSelectedFilters = Object.keys(filters)
-      .filter((key) => filters[key].selected)
-      .map((key) => filters[key]);
-    setSelectedFilters(newSelectedFilters);
-  }, [filters]);
-  const shouldRenderModal = typeof window !== 'undefined' && window.matchMedia("(max-width: 767px)").matches;
+    console.log("--------inp", searchValue)
+    dispatch(setLoading(true));
+    const newFilters = getSearchedFilters(genres, genders, tiers, filters);
+    if (newFilters.length > 0) {
+      setSearchedFilters(newFilters);
+    } else if (!Array.isArray(newFilters)) {
+      setSearchedFilters([]);
+    } else {
+      setSearchedFilters(filters);
+    }
+    dispatch(setLoading(false));
+  }, [filters, genres, tiers, genders, sizes]);
+  const shouldRenderModal =
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 767px)").matches;
 
   return (
     <div className="flex flex-col w-full py-4 gap-4">
       <div className="flex md:flex-row flex-col md:gap-0 gap-2 w-full justify-between">
         <div className="flex flex-col gap-2 md:w-[60%] w-full">
           <p className="md:text-[20px]  font-bold">Genres</p>
-          <Dropdown options={genres} placeholder={"Select Genre..."} />
+          <Dropdown
+            options={genres?.filter((genre) => !genre.selected)}
+            placeholder={"Select Genre..."}
+            handleSelectedOption={handleSelectedGenre}
+          />
         </div>
         <div className="flex flex-col gap-2 md:w-[38%] w-full">
           <p className="md:text-[20px] text-[16px] font-bold">Sizes</p>
-          <Dropdown options={sizes} placeholder={"Size"} />
+          <Dropdown
+            options={sizes}
+            placeholder={"Size"}
+            handleSelectedOption={(opt) => {}}
+          />
         </div>
       </div>
       <div
         className={`flex flex-row gap-2 w-full overflow-auto
        scroll-container max-w-full`}
       >
-        {genres?.map((item, i) => (
-          <Button
-            text={item.value}
-            isSelected={item.selected}
-            image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
-            key={i}
-            styles={{minWidth:160}}
-            onClick={() => {
-              if (item.value === "Filters") {
-                setOpenModal(!openModal);
+        {[
+          { value: "Filters", selected: false },
+          ...(genres?.filter((genre) => genre.selected) || []),
+        ]?.map((item, i) => (
+          <div className="relative">
+            <Button
+              text={item.value}
+              showDelBtn={item.value === "Filters" ? false : true}
+              image={
+                item.value === "Filters" ? "/assets/svgs/filters.svg" : null
               }
-              else{
-                handleSelectedGenre(item)
-              }
-            }}
-          />
+              key={i}
+              styles={{ minWidth: 160 }}
+              delBtnClick={() => {
+                handleSelectedGenre(item);
+              }}
+              onClick={() => {
+                if (item.value === "Filters") {
+                  setOpenModal(!openModal);
+                }
+              }}
+            />
+          </div>
         ))}
       </div>
       {/* make parent dive and rap the image gallery to a div */}
@@ -114,34 +131,47 @@ const Genres = () => {
           >
             {" "}
             <FiltersSidebar
-                handleSelectedGender={handleSelectedGender}
-                genders={genders}
-                tiers={tiers}
-                handleSelectedTier={handleSelectedTier}
-                handleCloseFilter={() => {
-                  setOpenModal(!openModal);
-                }}
+              handleSelectedGender={handleSelectedGender}
+              genders={genders}
+              tiers={tiers}
+              handleSelectedTier={handleSelectedTier}
+              handleCloseFilter={() => {
+                setOpenModal(!openModal);
+              }}
             />
           </Modal>
         ) : (
           openModal && (
             <FiltersSidebar
-            handleSelectedGender={handleSelectedGender}
-            genders={genders}
-            tiers={tiers}
-            handleSelectedTier={handleSelectedTier}
-            handleCloseFilter={() => {
-              setOpenModal(!openModal);
-            }}
+              handleSelectedGender={handleSelectedGender}
+              genders={genders}
+              tiers={tiers}
+              handleSelectedTier={handleSelectedTier}
+              handleCloseFilter={() => {
+                setOpenModal(!openModal);
+              }}
             />
           )
         )}
-
-        <ImageGallery
-          ImageSources={filters}
-          handleImageSelection={handleToggleFilter}
-          isSelectedImage={false}
-        />
+        {isLoading ? (
+          <div className="w-full flex h-[300px] justify-center items-center">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            {searchedFilters && searchedFilters.length > 0 ? (
+              <ImageGallery
+                ImageSources={searchedFilters}
+                handleImageSelection={handleToggleFilter}
+                isSelectedImage={false}
+              />
+            ) : (
+              <div className="flex h-[100%] w-[100%] justify-center items-center">
+                <p className="sub-text text-[15px]">No images found!</p>
+              </div>
+            )}
+          </>
+        )}
       </div>
 
       {/* {isSelectedFilter && (

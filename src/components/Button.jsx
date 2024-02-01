@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const Button = ({
   text,
   image,
@@ -6,7 +8,10 @@ const Button = ({
   classes = "",
   textClasses = "",
   onClick,
+  showDelBtn,
+  delBtnClick
 }) => {
+  const [isViewDelBtn, setIsViewDelBtn] = useState(false);
   return (
     <button
       className={`cursor-pointer md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
@@ -17,6 +22,8 @@ const Button = ({
               : "hover:bg-[#DE29E233]"
           } ${classes}`}
       onClick={onClick}
+      onMouseEnter={()=> {setIsViewDelBtn(true)}}
+      onMouseLeave={()=> {setIsViewDelBtn(false)}}
       style={styles}
     >
       <div className="flex items-center"> {/* Wrap content in a flex container */}
@@ -26,6 +33,14 @@ const Button = ({
         >
           {text}
         </p>
+        {showDelBtn && isViewDelBtn &&(
+          <img
+            src={"/assets/svgs/trash.svg"}
+            alt="Button Image"
+            className="w-3 h-3 top-[4px] right-3 absolute"
+            onClick={delBtnClick}
+          />
+        )}
         {image && (
           <img
             src={image}
