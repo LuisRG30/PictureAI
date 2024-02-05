@@ -4,16 +4,7 @@ import { useState } from "react";
 import { useRouter } from 'next/router';
 
 const CreateImages = () => {
-  const [searchInput, setSearchInput] = useState("");
   const router = useRouter();
-
-  const onSearchClick = () => {
-    if(searchInput.length > 0){
-      router.push('/products', {
-        search: searchInput,
-      });
-    }
-  };
 
   return (
     <div className={`xPaddings relative`}>
@@ -42,9 +33,7 @@ const CreateImages = () => {
                 create stunning visuals that are entirely unique. Say goodbye to
                 stock photos and hello to a world of endless possibilities
               </p>
-            </div>
-
-            <SearchBar onClick={onSearchClick} searchInput={searchInput} setSearchInput={setSearchInput} />
+            </div>  
 
             <div
               className="flex md:flex-row flex-col w-full md:h-[260px]

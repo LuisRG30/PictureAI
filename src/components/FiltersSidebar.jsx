@@ -6,7 +6,9 @@ export default function FiltersSidebar({
   genders,
   tiers,
   handleSelectedTier,
-  handleCloseFilter
+  handleCloseFilter,
+  selectedFilters,
+  handleImageSelection
   // handleToggleFilter,
 }) {
   const gradientStyle = {
@@ -97,17 +99,19 @@ export default function FiltersSidebar({
           ))}
         </div>
       </div>
-      <div className="border-b-2 border-[#828082] text-[#828082] text-base">
+      <div className="border-b-2 py-2 border-[#828082] text-[#828082] text-sm">
         Selected images would be shown here.
       </div>
       {/* Image selection */}
 
-      {/* <ImageGallery
-        ImageSources={selectedFilters}
-        handleImageSelection={handleToggleFilter}
-        isSelectedImage={false}
-        isFilterBar={true}
-      /> */}
+      <div className="pt-4">
+            <ImageGallery
+              ImageSources={selectedFilters}
+              isSelectionDisabled={false}
+              isSelectedImage={true}
+              handleImageSelection={handleImageSelection}
+            />
+          </div>
     </div>
   );
 }

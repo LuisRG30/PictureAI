@@ -1,43 +1,41 @@
-export const getSearchedFilters = (genres, genders, tiers, filters) => {
+export const getSearchedFilters = (genres, genders, tiers, filters, searchValue) => {
   let newFilters = [];
   genders = getSelectedValues(genders);
   genres = getSelectedValues(genres);
   tiers = getSelectedValues(tiers);
-  console.log("Filters", genres, genders, tiers);
+
   filters.forEach((filter) => {
-    if (
-      (genders.length === 0 || genders.includes(filter.gender)) &&
-      (genres.length === 0 || genres.includes(filter.genre)) &&
-      (tiers.length === 0 || tiers.includes(filter.tier))
-    ) {
+    const isMatchedGenre = (genders.length === 0 || genders.includes(filter.gender));
+    const isMatchedGender = (genres.length === 0 || genres.includes(filter.genre));
+    const isMatchedTier = (tiers.length === 0 || tiers.includes(filter.tier));
+
+    const isMatchedSearch =
+      !searchValue ||
+      filter?.genre?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      filter?.gender?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      filter?.tier?.toLowerCase().includes(searchValue.toLowerCase());
+
+    if (isMatchedGenre && isMatchedGender && isMatchedTier && isMatchedSearch) {
       newFilters.push(filter);
     }
   });
-  if(newFilters.length === 0 && (genders.length > 0 || genres.length > 0 || tiers.length > 0)){
+
+  if (newFilters.length === 0 && (genders.length > 0 || genres.length > 0 || tiers.length > 0)) {
     return false;
   }
-  //   newFilters = newFilters.length > 0 ? newFilters : filters;
-  //   newFilters.forEach((filter) => {
-  //     genders.forEach((gen) => {
-  //       if (gen.selected && filter.gender === gen.value) {
-  //         if (!newFilters.some((existingFilter) => existingFilter === filter)) {
-  //           newFilters.push(filter);
-  //         }
-  //       }
-  //     });
-  //   });
-  //   newFilters = newFilters.length > 0 ? newFilters : filters;
-  //   newFilters.forEach((filter) => {
-  //     tiers.forEach((tie) => {
-  //       if (tie.selected && filter.genre === tie.value) {
-  //         if (!newFilters.some((existingFilter) => existingFilter === filter)) {
-  //           newFilters.push(filter);
-  //         }
-  //       }
-  //     });
-  //   });
+
   return newFilters;
 };
+
+export const getSelectedFilters = (filters) => {
+  const selectedFilters = [];
+  filters.forEach((filter) => {
+    if (filter.selected) {
+      selectedFilters.push(filter);
+    }
+  });
+  return selectedFilters;
+}
 
 export const getSelectedValues = (arr) => {
   const valuesArr = [];

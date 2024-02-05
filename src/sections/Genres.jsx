@@ -15,12 +15,15 @@ import {
 } from "../store/images/imagesSlice";
 import { useEffect, useState } from "react";
 import FiltersSidebar from "../components/FiltersSidebar";
-import { getSearchedFilters } from "../utils/filtersHelper";
+import { getSearchedFilters, getSelectedFilters } from "../utils/filtersHelper";
+import SearchBar from "../components/SearchBar";
 
 const Genres = ({searchValue}) => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [searchedFilters, setSearchedFilters] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const router = useRouter();
   const {
     filters,
@@ -36,6 +39,10 @@ const Genres = ({searchValue}) => {
   const handleToggleFilter = (id) => {
     dispatch(toggleFilter({ id }));
   };
+
+  const onSearchClick = () => {
+
+  }
 
   const handleClearFilters = () => {
     dispatch(clearFilters());
@@ -54,9 +61,8 @@ const Genres = ({searchValue}) => {
   };
 
   useEffect(() => {
-    console.log("--------inp", searchValue)
     dispatch(setLoading(true));
-    const newFilters = getSearchedFilters(genres, genders, tiers, filters);
+    const newFilters = getSearchedFilters(genres, genders, tiers, filters, searchInput);
     if (newFilters.length > 0) {
       setSearchedFilters(newFilters);
     } else if (!Array.isArray(newFilters)) {
@@ -65,7 +71,13 @@ const Genres = ({searchValue}) => {
       setSearchedFilters(filters);
     }
     dispatch(setLoading(false));
-  }, [filters, genres, tiers, genders, sizes]);
+  }, [filters, genres, tiers, genders, searchInput]);
+
+  useEffect(() => {
+    const newFilters = getSelectedFilters(filters);
+    setSelectedFilters(newFilters);
+  }, [filters]);
+
   const shouldRenderModal =
     typeof window !== "undefined" &&
     window.matchMedia("(max-width: 767px)").matches;
@@ -82,12 +94,8 @@ const Genres = ({searchValue}) => {
           />
         </div>
         <div className="flex flex-col gap-2 md:w-[38%] w-full">
-          <p className="md:text-[20px] text-[16px] font-bold">Sizes</p>
-          <Dropdown
-            options={sizes}
-            placeholder={"Size"}
-            handleSelectedOption={(opt) => {}}
-          />
+          <p className="md:text-[20px] text-[16px] font-bold">Search</p>
+          <SearchBar onClick={onSearchClick} searchInput={searchInput} setSearchInput={setSearchInput} />
         </div>
       </div>
       <div
@@ -138,6 +146,8 @@ const Genres = ({searchValue}) => {
               handleCloseFilter={() => {
                 setOpenModal(!openModal);
               }}
+              selectedFilters={selectedFilters}
+              handleImageSelection={handleToggleFilter}
             />
           </Modal>
         ) : (
@@ -150,6 +160,8 @@ const Genres = ({searchValue}) => {
               handleCloseFilter={() => {
                 setOpenModal(!openModal);
               }}
+              selectedFilters={selectedFilters}
+              handleImageSelection={handleToggleFilter}
             />
           )
         )}
@@ -160,11 +172,13 @@ const Genres = ({searchValue}) => {
         ) : (
           <>
             {searchedFilters && searchedFilters.length > 0 ? (
+              <div className="max-h-[600px] w-full overflow-auto">
               <ImageGallery
                 ImageSources={searchedFilters}
                 handleImageSelection={handleToggleFilter}
                 isSelectedImage={false}
               />
+              </div>
             ) : (
               <div className="flex h-[100%] w-[100%] justify-center items-center">
                 <p className="sub-text text-[15px]">No images found!</p>

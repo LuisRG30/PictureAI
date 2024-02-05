@@ -1,4 +1,5 @@
 import { Button, ImageGallery, UploadImage, Modal } from "@/src/components";
+import { Preferences } from "@/src/components/Preferences";
 import { Genres, NotifyModal } from "@/src/sections";
 import TermsModal from "@/src/sections/TermsModal";
 import {
@@ -12,16 +13,21 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const UploadImagePage = () => {
+const UploadImagePage = ({selectedFilters}) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { filters, uploadImage, filteredImages, error } = useSelector(
     (state) => state.images
   );
   const [isSelectedFilter, setIsSelectedFilter] = useState(false);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  // const [selectedFilters, setSelectedFilters] = useState([]);
   const [isOpenImageModal, setIsOpenImageModal] = useState(false);
   const [isOpenTermsModal, setIsOpenTermsModal] = useState(false);
+  const [gender, setGender] = useState(null);
+
+  const [hairColors, setHairColors] = useState([]);
+
+  const [varyFacialHair, setVaryFacialHair] = useState(null);
 
   const handleOpenImageModal = () => {
     setIsOpenImageModal(true);
@@ -31,14 +37,47 @@ const UploadImagePage = () => {
     setIsOpenImageModal(false);
   };
 
-  useEffect(() => {
-    const newSelectedFilters = Object.keys(filters)
-      .filter((key) => filters[key].selected)
-      .map((key) => filters[key]);
-    setSelectedFilters(newSelectedFilters);
+  function toggleSelectHairColor(hairColor) {
+    const updatedHairColors = [...hairColors];
+    const index = updatedHairColors.indexOf(hairColor);
+    if (index > -1) {
+      updatedHairColors.splice(index, 1);
+    } else {
+      updatedHairColors.push(hairColor);
+    }
+    setHairColors(updatedHairColors);
+  }
 
-    dispatch(setFilteredImages(newSelectedFilters));
-  }, [uploadImage, filters]);
+  // useEffect(() => {
+  //   const newSelectedFilters = Object.keys(filters)
+  //     .filter((key) => filters[key].selected)
+  //     .map((key) => filters[key]);
+  //   setSelectedFilters(newSelectedFilters);
+
+  //   dispatch(setFilteredImages(newSelectedFilters));
+  // }, [uploadImage, filters]);
+
+  const sendOrderInfo = async () => {
+    const selectedProducts = selectedFilters;
+    const formData = new FormData();
+    formData.append('image', uploadImage);
+    formData.append('products', JSON.stringify(selectedProducts));
+    formData.append('gender', gender);
+    formData.append('hairColors', JSON.stringify(hairColors));
+    formData.append('varyFacialHair', JSON.stringify(varyFacialHair));
+    console.log("formdata", selectedProducts,uploadImage,gender,hairColors,varyFacialHair)
+    // const response = await axios.post('/api/checkout_sessions', formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data'
+    //   }
+    // });
+    // const session = await response.data;
+    // const stripe = await stripePromise;
+    // const { error } = await stripe.redirectToCheckout({
+    //   sessionId: session.id,
+    // });
+    // console.log(error.message);
+  }
 
   return (
     <div className={`${!isSelectedFilter && "xPaddings"} relative`}>
@@ -49,6 +88,7 @@ const UploadImagePage = () => {
               <UploadImage
                 image={uploadImage}
                 setUploadedImage={(img) => {
+                  console.log("uploaded img", img)
                   dispatch(setUploadedImage(img));
                   handleOpenImageModal();
                 }}
@@ -58,12 +98,18 @@ const UploadImagePage = () => {
                 }}
               />
 
-              <ImageGallery
+              {/* <ImageGallery
                 ImageSources={filteredImages}
                 isRemoveEnabled={true}
                 handleRemoveImage={(id) => {
                   dispatch(removeFilteredImagesById(id));
                 }}
+              /> */}
+
+              <Preferences
+                setGender={setGender}
+                toggleSelectHairColor={toggleSelectHairColor}
+                setVaryFacialHair={setVaryFacialHair}
               />
               <div className="w-full">
                 <Button
@@ -76,6 +122,7 @@ const UploadImagePage = () => {
                   }}
                   onClick={() => {
                     setIsOpenImageModal(true);
+                    sendOrderInfo();
                   }}
                 />
               </div>

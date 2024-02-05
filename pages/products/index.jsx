@@ -20,7 +20,6 @@ const Products = () => {
   const { error } = useSelector(
     (state) => state.images
   );
-  console.log("que", router.query)
   const [isOpenImageModal, setIsOpenImageModal] = useState(false);
   const [isOpenTermsModal, setIsOpenTermsModal] = useState(false);
   const stylesSelectionBox = {

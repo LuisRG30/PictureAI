@@ -59,7 +59,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
               onChange={handleFileChange}
             />
           </label>
-          <Button text="Generate" />
+          {/* <Button text="Generate" /> */}
         </div>
       </div>
     </div>

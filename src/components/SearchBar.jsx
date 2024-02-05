@@ -8,10 +8,11 @@ const SearchBar = ({
   searchInput,
   setSearchInput,
 }) => {
-  const searchBarClasses = `relative bg-black rounded-full md:h-auto h-full overflow-hidden
-   w-${width} gradient-border max-w-[100%] md:max-w-[460px]`;
+  const searchBarClasses = ` border border-gray-500 bg-transparent text-white 
+  relative bg-black rounded-full md:h-auto h-full overflow-hidden
+   w-${width} max-w-[100%] md:max-w-[460px]`;
   const inputClasses =
-    "w-full h-10 px-10 py-6 pr-[70px] border-none outline-none text-white bg-black gradient-border";
+    "w-full h-10 px-10 py-3 pr-[70px] border-none outline-none text-white bg-black";
   const iconContainerClasses =
     "absolute right-9 top-1/2 transform -translate-y-1/2";
 
@@ -34,7 +35,9 @@ const SearchBar = ({
             className="cursor-pointer"
           />
         ) : (
-          <button className="cursor-pointer text-white" onClick={onClick}>Search</button>
+          <button className="cursor-pointer text-white" onClick={onClick}>
+            Search
+          </button>
         )}
       </div>
     </div>
