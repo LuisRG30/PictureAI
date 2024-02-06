@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '.';
 
-const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
+const UploadImage = ({ setUploadedImage, clearUploadedImage, image }) => {
   const [preview, setPreview] = useState(null);
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -11,7 +11,7 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setUploadedImage(reader.result);
+          setUploadedImage(e.target.files[0]);
           setPreview(reader.result);
         };
         reader.readAsDataURL(file);
@@ -21,6 +21,22 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage }) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (image) {
+      // Check if the file type is either an image or a video
+      if (image.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(image);
+      } else {
+        // Handle invalid file type
+        alert('Invalid file type. Please upload an image.');
+      }
+    }
+  },[])
 
   const handleRemoveImage = () => {
     clearUploadedImage();

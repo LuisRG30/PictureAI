@@ -1,22 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProducts } from './imagesActions';
+import { fetchProducts, stripeCheckout, verifyFaceFromImage } from './imagesActions';
 
 const initialState = {
   filters: [],
-  selectedFilters:[],
   uploadedImage: null,
+  paymentIntent: null,
   filteredImages: [],
   isLoading: false,
   error: false,
   genres: null,
   genders: null,
   tiers: null,
-  sizes: [
-    {value:"668 X 740", selected: true}, 
-    {value:"1200 X 720", selected:false}, 
-    {value:"400 X 210",selected: false}
-  ],
   products: [],
+  faces: []
 };
 
 const imagesSlice = createSlice({
@@ -50,6 +46,12 @@ const imagesSlice = createSlice({
     setGenres: (state, action) => {
       state.genres = action.payload;
     },
+    setFaces: (state, action) => {
+      state.faces = action.payload;
+    },
+    setPaymentIntent: (state, action) => {
+      state.paymentIntent = action.payload;
+    },
     setGenders: (state, action) => {
       state.genders = action.payload;
     },
@@ -67,9 +69,6 @@ const imagesSlice = createSlice({
       state.filteredImages = state.filteredImages.filter(
         (image) => image.id !== idToRemove
       );
-    },
-    searchFilter: (state, action) => {
-
     },
     toogleGenre: (state, action) => {
       const genreValue = action.payload.value || action.payload;
@@ -132,6 +131,18 @@ const imagesSlice = createSlice({
       .addCase(fetchProducts.rejected, (state) => {
         state.isLoading = false;
         state.error = true;
+      })
+      .addCase(stripeCheckout.fulfilled, (state, action) => {
+        // Handle successful fulfillment
+      })
+      .addCase(stripeCheckout.rejected, (state, action) => {
+        state.error = {message:"Image uplaod error! Please try later"}
+      })
+      .addCase(verifyFaceFromImage.fulfilled, (state, action) => {
+        state.faces = action.payload?.data?.faces || [];
+      })
+      .addCase(verifyFaceFromImage.rejected, (state, action) => {
+        state.error = {message:"Please select an image that has a face."}
       });
   },
 });
@@ -151,7 +162,8 @@ export const {
   removeFilteredImagesById,
   toogleGender,
   toogleGenre,
-  toogleTier
+  toogleTier,
+  setPaymentIntent
 } = imagesSlice.actions;
 
 export const selectFilters = (state) => state.images.filters;

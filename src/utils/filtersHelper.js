@@ -47,3 +47,13 @@ export const getSelectedValues = (arr) => {
     });
   return valuesArr;
 };
+
+export const getMappedProductsOfFilters = (filters, products) => {
+  // Extract IDs from filters for efficient lookup
+  const filterIds = new Set(filters?.map(filter => filter.id));
+
+  // Filter products based on the presence of corresponding filter IDs
+  const filteredProducts = products.filter(product => filterIds.has(product.id));
+  return filteredProducts;
+};
+

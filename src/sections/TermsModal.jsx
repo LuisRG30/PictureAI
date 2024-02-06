@@ -167,4 +167,4 @@ const TermsModal = ({ isOpen, onClose, onAgree }) => {
   );
 };
 
-export default TermsModal;
+export {TermsModal};
