@@ -1,6 +1,8 @@
 import { Button } from "@/src/components";
+import { useRouter } from "next/navigation";
 
 const MysteryBox = () => {
+  const navigate = useRouter();
   return (
     <div className={`xPaddings yPaddings relative`}>
       <div
@@ -19,7 +21,11 @@ const MysteryBox = () => {
         >
           <div className="flex flex-col justify-center items-center gap-6">
             <img src="/assets/svgs/silver-box.svg" width={229} height={248} />
-            <Button text="SILVER $10" classes=" w-full max-w-full" />
+            <Button
+              onClick={() => navigate.push("/products")}
+              text="MYSTERY BOX S"
+              classes=" w-full max-w-full cursor-pointer"
+            />
             <div className="border border-1 rounded-md p-4 w-full">
               <p>
                 You may get: <br />
@@ -33,14 +39,14 @@ const MysteryBox = () => {
           <div className="flex flex-col justify-center items-center gap-6">
             <img src="/assets/svgs/gold-box.svg" className="w-100px" />
             <Button
-              text="GOLD $40"
+              onClick={() => navigate.push("/products")}
+              text="MYSTERY BOX M"
               classes="w-full max-w-full bg-purple-gradient"
             />
             <div
               className="border border-1 rounded-md p-4 bg-black-purple w-full"
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(203, 88, 250, 0.00) 0%, #8348F0 100%)",
+                background: "linear-gradient(180deg, rgba(203, 88, 250, 0.00) 0%, #8348F0 100%)",
               }}
             >
               <p>
@@ -54,8 +60,34 @@ const MysteryBox = () => {
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
             <img src="/assets/svgs/diamond-box.svg" width={229} height={248} />
-            <Button text="DIAMOND $80" classes="w-full max-w-full" />
+            <Button
+              onClick={() => navigate.push("/products")}
+              text="MYSTERY BOX L"
+              classes="w-full max-w-full"
+            />
             <div className="border border-1 rounded-md p-4 w-full">
+              <p>
+                You may get: <br />
+                <br />
+                1. Lorem Ipsum dolor <br />
+                2. Lorem Ipsum dolor <br />
+                3. Lorem Ipsum dolor{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center gap-6">
+            <img src="/assets/svgs/gold-box.svg" className="w-100px" />
+            <Button
+              onClick={() => navigate.push("/products")}
+              text="MYSTERY BOX XL"
+              classes="w-full max-w-full bg-purple-gradient"
+            />
+            <div
+              className="border border-1 rounded-md p-4 bg-black-purple w-full"
+              style={{
+                background: "linear-gradient(180deg, rgba(203, 88, 250, 0.00) 0%, #8348F0 100%)",
+              }}
+            >
               <p>
                 You may get: <br />
                 <br />

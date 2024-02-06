@@ -18,31 +18,20 @@ import FiltersSidebar from "../components/FiltersSidebar";
 import { getSearchedFilters, getSelectedFilters } from "../utils/filtersHelper";
 import SearchBar from "../components/SearchBar";
 
-const Genres = ({searchValue}) => {
+const Genres = ({ searchValue }) => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const [searchedFilters, setSearchedFilters] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const router = useRouter();
-  const {
-    filters,
-    uploadImage,
-    filteredImages,
-    error,
-    genres,
-    tiers,
-    genders,
-    sizes,
-    isLoading,
-  } = useSelector((state) => state.images);
+  const { filters, uploadImage, filteredImages, error, genres, tiers, genders, sizes, isLoading } =
+    useSelector((state) => state.images);
   const handleToggleFilter = (id) => {
     dispatch(toggleFilter({ id }));
   };
 
-  const onSearchClick = () => {
-
-  }
+  const onSearchClick = () => {};
 
   const handleClearFilters = () => {
     dispatch(clearFilters());
@@ -78,9 +67,10 @@ const Genres = ({searchValue}) => {
     setSelectedFilters(newFilters);
   }, [filters]);
 
-  const shouldRenderModal =
-    typeof window !== "undefined" &&
-    window.matchMedia("(max-width: 767px)").matches;
+  const gradientStyle = {
+    backgroundImage: "linear-gradient(to right, rgba(222, 41, 226, 0.08), blue 500)",
+  };
+  const shouldRenderModal = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 
   return (
     <div className="flex flex-col w-full py-4 gap-4">
@@ -102,40 +92,37 @@ const Genres = ({searchValue}) => {
         className={`flex flex-row gap-2 w-full overflow-auto
        scroll-container max-w-full`}
       >
-        {[
-          { value: "Filters", selected: false },
-          ...(genres?.filter((genre) => genre.selected) || []),
-        ]?.map((item, i) => (
-          <div className="relative">
-            <Button
-              text={item.value}
-              showDelBtn={item.value === "Filters" ? false : true}
-              image={
-                item.value === "Filters" ? "/assets/svgs/filters.svg" : null
-              }
-              key={i}
-              styles={{ minWidth: 160 }}
-              delBtnClick={() => {
-                handleSelectedGenre(item);
-              }}
-              onClick={() => {
-                if (item.value === "Filters") {
-                  setOpenModal(!openModal);
-                }
-              }}
-            />
-          </div>
-        ))}
+        {[{ value: "Filters", selected: false }, ...(genres?.filter((genre) => genre.selected) || [])]?.map(
+          (item, i) => (
+            <div className="relative">
+              <Button
+                text={item.value}
+                showDelBtn={item.value === "Filters" ? false : true}
+                image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
+                key={i}
+                styles={{ minWidth: 160 }}
+                delBtnClick={() => {
+                  handleSelectedGenre(item);
+                }}
+                onClick={() => {
+                  if (item.value === "Filters") {
+                    setOpenModal(!openModal);
+                  }
+                }}
+              />
+            </div>
+          )
+        )}
       </div>
       {/* make parent dive and rap the image gallery to a div */}
-      <div className="  w-full flex flex-row">
+      <div className="h-[100%]   w-full flex flex-row">
         {shouldRenderModal ? (
           <Modal
             onClose={() => {
               setOpenModal(!openModal);
             }}
             isOpen={openModal}
-            mainClass={"bg-black"}
+            mainClass={"bg-[black]"}
           >
             {" "}
             <FiltersSidebar
@@ -166,21 +153,21 @@ const Genres = ({searchValue}) => {
           )
         )}
         {isLoading ? (
-          <div className="w-full flex h-[300px] justify-center items-center">
+          <div className=" flex w-[100%] h-[100%]  xl:h-[380px] justify-center items-center">
             <Loader />
           </div>
         ) : (
           <>
             {searchedFilters && searchedFilters.length > 0 ? (
               <div className="max-h-[600px] w-full overflow-auto">
-              <ImageGallery
-                ImageSources={searchedFilters}
-                handleImageSelection={handleToggleFilter}
-                isSelectedImage={false}
-              />
+                <ImageGallery
+                  ImageSources={searchedFilters}
+                  handleImageSelection={handleToggleFilter}
+                  isSelectedImage={false}
+                />
               </div>
             ) : (
-              <div className="flex h-[100%] w-[100%] justify-center items-center">
+              <div className="flex w-[100%] h-[100%]  xl:h-[380px] justify-center items-center">
                 <p className="sub-text text-[15px]">No images found!</p>
               </div>
             )}
@@ -210,7 +197,7 @@ const Genres = ({searchValue}) => {
         <div className="flex flex-col w-[200px] justify-center items-center"></div>
         <div className="flex flex-col w-[200px] justify-center items-center">
           <button
-            className="flex w-64 h-14 justify-center items-center self-center md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
+            className="flex w-40 h-14 sm:w-64 sm:h-14 justify-center items-center self-center md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
           border-gray-500  "
             style={{
               background: "linear-gradient(90deg, #E85EFF 0%, #6843EC 108.39%)",
@@ -221,11 +208,7 @@ const Genres = ({searchValue}) => {
           </button>
         </div>
         <div className="flex flex-col w-[200px] justify-center items-center">
-          <img
-            src="/assets/images/mystery-box.png"
-            alt="atro-img"
-            className="w-[195px] h-[190px]"
-          />
+          <img src="/assets/images/mystery-box.png" alt="atro-img" className="w-[100%]" />
           <button
             className="md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
           border-gray-500 w-max hover:bg-[#DE29E233]"
