@@ -120,7 +120,7 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
                 toggleSelectHairColor={toggleSelectHairColor}
                 setVaryFacialHair={setVaryFacialHair}
               />
-              <div className="w-full">
+              <div className="w-full md:px-0 px-5">
                 <Button
                   text={"Checkout"}
                   styles={{

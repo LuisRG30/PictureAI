@@ -21,17 +21,8 @@ const Genres = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const router = useRouter();
-  const {
-    filters,
-    uploadImage,
-    filteredImages,
-    error,
-    genres,
-    tiers,
-    genders,
-    sizes,
-    isLoading,
-  } = useSelector((state) => state.images);
+  const { filters, uploadImage, filteredImages, error, genres, tiers, genders, sizes, isLoading } =
+    useSelector((state) => state.images);
   const handleToggleFilter = (id) => {
     dispatch(toggleFilter({ id }));
   };
@@ -78,9 +69,10 @@ const Genres = () => {
     setSelectedFilters(newFilters);
   }, [filters]);
 
-  const shouldRenderModal =
-    typeof window !== "undefined" &&
-    window.matchMedia("(max-width: 767px)").matches;
+  const gradientStyle = {
+    backgroundImage: "linear-gradient(to right, rgba(222, 41, 226, 0.08), blue 500)",
+  };
+  const shouldRenderModal = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 
   return (
     <div className="flex flex-col w-full py-4 gap-4">
@@ -106,40 +98,37 @@ const Genres = () => {
         className={`flex flex-row gap-2 w-full overflow-auto
        scroll-container max-w-full`}
       >
-        {[
-          { value: "Filters", selected: false },
-          ...(genres?.filter((genre) => genre.selected) || []),
-        ]?.map((item, i) => (
-          <div className="relative">
-            <Button
-              text={item.value}
-              showDelBtn={item.value === "Filters" ? false : true}
-              image={
-                item.value === "Filters" ? "/assets/svgs/filters.svg" : null
-              }
-              key={i}
-              styles={{ minWidth: 160 }}
-              delBtnClick={() => {
-                handleSelectedGenre(item);
-              }}
-              onClick={() => {
-                if (item.value === "Filters") {
-                  setOpenModal(!openModal);
-                }
-              }}
-            />
-          </div>
-        ))}
+        {[{ value: "Filters", selected: false }, ...(genres?.filter((genre) => genre.selected) || [])]?.map(
+          (item, i) => (
+            <div className="relative">
+              <Button
+                text={item.value}
+                showDelBtn={item.value === "Filters" ? false : true}
+                image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
+                key={i}
+                styles={{ minWidth: 160 }}
+                delBtnClick={() => {
+                  handleSelectedGenre(item);
+                }}
+                onClick={() => {
+                  if (item.value === "Filters") {
+                    setOpenModal(!openModal);
+                  }
+                }}
+              />
+            </div>
+          )
+        )}
       </div>
       {/* make parent dive and rap the image gallery to a div */}
-      <div className="  w-full flex flex-row">
+      <div className="h-[100%]   w-full flex flex-row">
         {shouldRenderModal ? (
           <Modal
             onClose={() => {
               setOpenModal(!openModal);
             }}
             isOpen={openModal}
-            mainClass={"bg-black"}
+            mainClass={"bg-[black]"}
           >
             {" "}
             <FiltersSidebar
@@ -184,7 +173,7 @@ const Genres = () => {
                 />
               </div>
             ) : (
-              <div className="flex h-[100%] w-[100%] justify-center items-center">
+              <div className="flex w-[100%] h-[100%]  xl:h-[380px] justify-center items-center">
                 <p className="sub-text text-[15px]">No images found!</p>
               </div>
             )}
@@ -193,7 +182,7 @@ const Genres = () => {
       </div>
 
       {!isLoading && (
-        <div className="flex flex-row w-full justify-between items-center ">
+        <div className="flex md:flex-row flex-col w-full justify-between items-center ">
           <div className="flex flex-col w-[200px] justify-center items-center"></div>
           <div className="flex flex-col w-[200px] justify-center items-center">
             <button

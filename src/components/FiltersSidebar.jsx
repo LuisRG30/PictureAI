@@ -8,27 +8,26 @@ export default function FiltersSidebar({
   handleSelectedTier,
   handleCloseFilter,
   selectedFilters,
-  handleImageSelection
+  handleImageSelection,
   // handleToggleFilter,
 }) {
   const gradientStyle = {
-    background:
-      "linear-gradient(180deg, rgba(222, 41, 226, 0.08) 0%, rgba(222, 41, 226, 0.00) 100%)",
+    background: "linear-gradient(180deg, rgba(222, 41, 226, 0.08) 0%, rgba(222, 41, 226, 0.00) 100%)",
   };
-  
+
   const [isGenderVisible, setIsGenderVisisble] = useState(true);
   const [isTierVisible, setIsTierVisisble] = useState(true);
 
   const toogleGender = () => {
     setIsGenderVisisble(!isGenderVisible);
-  }
+  };
   const toogleTier = () => {
     setIsTierVisisble(!isTierVisible);
-  }
+  };
 
   return (
     <div
-      className=" w-96 h-[662px] overflow-x-hidden space-y-3 overflow-auto
+      className="mt-5 w-80 h-[662px] overflow-x-hidden space-y-3 overflow-auto
       scroll-container p-5"
       style={gradientStyle}
     >
@@ -46,13 +45,13 @@ export default function FiltersSidebar({
         <div className="h-8  flex justify-between">
           <p className=" text-base font-normal text-white">Gender</p>
           <img
-            src={!isGenderVisible ? "assets/images/arrow.png":"assets/images/down-arrow.png"}
+            src={!isGenderVisible ? "assets/images/arrow.png" : "assets/images/down-arrow.png"}
             alt="dropdown"
             className="w-6 h-6 ml-2 inline-block cursor-pointer"
             onClick={toogleGender}
           />
         </div>
-        <div className={`w-full ${isGenderVisible ? "flex":"hidden"} gap-x-3 gap-y-3 py-5 flex-wrap`}>
+        <div className={`w-full ${isGenderVisible ? "flex" : "hidden"} gap-x-3 gap-y-3 py-5 flex-wrap`}>
           {genders?.map((item, key) => (
             <div
               className={`py-2 px-4 justify-center rounded-[45px] items-center flex text-white cursor-pointer ${
@@ -75,13 +74,13 @@ export default function FiltersSidebar({
         <div className="h-10  flex justify-between">
           <p className=" text-base font-normal text-white">Tier</p>
           <img
-            src={!isTierVisible ? "assets/images/arrow.png":"assets/images/down-arrow.png"}
+            src={!isTierVisible ? "assets/images/arrow.png" : "assets/images/down-arrow.png"}
             alt="dropdown"
             className="w-6 h-6 ml-2 inline-block cursor-pointer"
             onClick={toogleTier}
           />
         </div>
-        <div className={`w-full  ${isTierVisible ? "flex":"hidden"} gap-3 py-5 flex-wrap`}>
+        <div className={`w-full  ${isTierVisible ? "flex" : "hidden"} gap-3 py-5 flex-wrap`}>
           {tiers?.map((item, key) => (
             <div
               className={`py-2 px-4 justify-center rounded-[45px] items-center flex text-white cursor-pointer ${
@@ -105,13 +104,13 @@ export default function FiltersSidebar({
       {/* Image selection */}
 
       <div className="pt-4">
-            <ImageGallery
-              ImageSources={selectedFilters}
-              isSelectionDisabled={false}
-              isSelectedImage={true}
-              handleImageSelection={handleImageSelection}
-            />
-          </div>
+        <ImageGallery
+          ImageSources={selectedFilters}
+          isSelectionDisabled={false}
+          isSelectedImage={true}
+          handleImageSelection={handleImageSelection}
+        />
+      </div>
     </div>
   );
 }

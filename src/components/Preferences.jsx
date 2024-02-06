@@ -1,34 +1,18 @@
 import React from "react";
 
-export const Preferences = ({
-  setGender,
-  toggleSelectHairColor,
-  setVaryFacialHair,
-}) => {
+export const Preferences = ({ setGender, toggleSelectHairColor, setVaryFacialHair }) => {
   return (
-    <div>
+    <div className="md:w-full w-[90%]">
       <p className="mt-2">Choose a prefered gender</p>
       <div className="flex flex-row gap-5">
         <div>
-          <input
-            type="radio"
-            id="man"
-            name="gender"
-            value="man"
-            onClick={() => setGender("man")}
-          />
+          <input type="radio" id="man" name="gender" value="man" onClick={() => setGender("man")} />
           <label className="text-white text-[15px] pl-1" for="man">
             Man
           </label>
         </div>
         <div>
-          <input
-            type="radio"
-            id="woman"
-            name="gender"
-            value="woman"
-            onClick={() => setGender("woman")}
-          />
+          <input type="radio" id="woman" name="gender" value="woman" onClick={() => setGender("woman")} />
           <label className="text-white text-[15px] pl-1" for="woman">
             Woman
           </label>
@@ -47,7 +31,7 @@ export const Preferences = ({
         </div>
       </div>
       <p className="mt-2">Choose one or more of these hair colors</p>
-      <div className="flex flex-row gap-3">
+      <div className="flex flex-row gap-3 flex-wrap">
         <div>
           <input
             type="checkbox"
@@ -121,9 +105,7 @@ export const Preferences = ({
           </label>
         </div>
       </div>
-      <p className="mt-2">
-        Would you like us to create pictures with varied facial hair styles?
-      </p>
+      <p className="mt-2">Would you like us to create pictures with varied facial hair styles?</p>
       <div className="flex flex-row gap-3">
         <div>
           <input

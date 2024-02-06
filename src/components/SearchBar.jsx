@@ -9,10 +9,10 @@ const SearchBar = ({
   setSearchInput,
 }) => {
   const searchBarClasses = ` border border-gray-500 bg-transparent text-white 
-  relative bg-black rounded-full md:h-auto h-full overflow-hidden
+  relative bg-transparent rounded-full md:h-auto h-full overflow-hidden
    w-${width} max-w-[100%] md:max-w-[460px]`;
   const inputClasses =
-    "w-full h-10 px-10 py-3 pr-[70px] border-none outline-none text-white bg-black";
+    "w-full md:h-10 h-8 px-10 py-3 pr-[70px] border-none outline-none text-white bg-transparent";
   const iconContainerClasses =
     "absolute right-9 top-1/2 transform -translate-y-1/2";
 

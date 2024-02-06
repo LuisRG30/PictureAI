@@ -47,7 +47,7 @@ const ImageGallery = ({
                     src={`assets/svgs/trash.svg`}
                     alt={`img-${i}`}
                     style={{ top: "5px", right: "5px" }}
-                    className="absolute w-[12px] h-[12px] cursor-pointer"
+                    className="absolute w-[12px] h-[12px] cursor-pointer rounded-md"
                   />
                 )}
                 <img
@@ -57,7 +57,7 @@ const ImageGallery = ({
                       ? "md:w-[121px] md:h-[112px] h-[100px] w-[100px]"
                       : `max-h-[270px] sm:h-[150px] h-[120px] ${
                           isSelectedImage ? "md:h-[82px]" : "md:h-[220px]"
-                        }  w-full`
+                        }  w-full rounded-md`
                   } 
                   `}
                   src={`${img.source || img.url}`}

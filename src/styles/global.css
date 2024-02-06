@@ -8,6 +8,10 @@
   box-sizing: border-box;
   font-family: "Eudoxus Sans", sans-serif;
   scroll-behavior: smooth;
+  /* background-color: black; */
+}
+body {
+  background-color: black;
 }
 
 @layer components {
@@ -19,7 +23,7 @@
       max-width: 1280px;
     }
   }
-  
+
   /* Padding Classes */
   .paddings {
     padding: 6px 12px;
@@ -93,7 +97,12 @@
   }
 
   .gradient-01 {
-    background: linear-gradient(180deg, rgba(128, 128, 128, 1) 0%, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(128, 128, 128, 1) 0%,
+      rgba(0, 0, 0, 1) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
     box-shadow: -5px -5px 250px 0px rgba(255, 255, 255, 0.02) inset;
     backdrop-filter: blur(21px);
     background-color: rgba(255, 255, 255, 0.8);
@@ -111,7 +120,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(270deg, #2C80FF 59.29%, #E95FFF 88.49%);
+    background: linear-gradient(270deg, #2c80ff 59.29%, #e95fff 88.49%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -119,67 +128,72 @@
 
   .gradient-border {
     border-radius: 38.125px;
-    border: 1px solid #DE29E2;
-    background: rgba(245, 245, 250, 0.00);
-    box-shadow: -1px -1px 2px 0px #FFF inset, 1px 1px 2px 0px rgba(170, 170, 204, 0.50) inset, 0.5px 0.5px 1px 0px rgba(119, 54, 130, 0.25) inset, -0.5px -0.5px 1px 0px rgba(255, 255, 255, 0.50) inset;
-    
+    border: 1px solid #de29e2;
+    background: rgba(245, 245, 250, 0);
+    box-shadow: -1px -1px 2px 0px #fff inset, 1px 1px 2px 0px rgba(170, 170, 204, 0.5) inset,
+      0.5px 0.5px 1px 0px rgba(119, 54, 130, 0.25) inset, -0.5px -0.5px 1px 0px rgba(255, 255, 255, 0.5) inset;
   }
 
   .bg-purple-gradient {
-    background: linear-gradient(180deg, #CA16F0 0%, #270874 100%);
+    background: linear-gradient(180deg, #ca16f0 0%, #270874 100%);
   }
 
   .bg-black-purple {
-    background: linear-gradient(180deg, rgba(203, 88, 250, 0.00) 0%, #8348F0 100%);
+    background: linear-gradient(180deg, rgba(203, 88, 250, 0) 0%, #8348f0 100%);
   }
 
   .sub-text {
     color: gray;
   }
-  
-  h1,h2,h3,h4,h5,h6,p {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     color: white;
   }
-  h1{
+  h1 {
     font-size: 21px;
   }
-/* Container with margin and custom scrollbar */
-.scroll-container {
-  padding: 10px; /* Add right margin to the container */
-  overflow-y: scroll; /* Enable vertical scrollbar */
-}
+  /* Container with margin and custom scrollbar */
+  .scroll-container {
+    padding: 10px; /* Add right margin to the container */
+    overflow-y: scroll; /* Enable vertical scrollbar */
+  }
 
-/* Define scrollbar track */
-.scroll-container::-webkit-scrollbar {
-  width: 8px; /* Set the width of the scrollbar */
-  height: 9px;
-}
+  /* Define scrollbar track */
+  .scroll-container::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+    height: 9px;
+  }
 
-/* Handle the scrollbar track */
-.scroll-container::-webkit-scrollbar-track {
-  background-color: #f0f0f0; /* Set the background color of the track */
-  border-radius: 10px; /* Set rounded borders */
-}
+  /* Handle the scrollbar track */
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Set the background color of the track */
+    border-radius: 10px; /* Set rounded borders */
+  }
 
-/* Handle when the user hovers over the scrollbar track */
-.scroll-container::-webkit-scrollbar-track:hover {
-  background-color: #e0e0e0; /* Set a slightly different color on hover */
-}
+  /* Handle when the user hovers over the scrollbar track */
+  .scroll-container::-webkit-scrollbar-track:hover {
+    background-color: #e0e0e0; /* Set a slightly different color on hover */
+  }
 
-/* Handle the scrollbar handle */
-.scroll-container::-webkit-scrollbar-thumb {
-  background-color: #a9a7a7; /* Set the color of the scrollbar handle */
-  border-radius: 10px; /* Set rounded borders */
-}
+  /* Handle the scrollbar handle */
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #a9a7a7; /* Set the color of the scrollbar handle */
+    border-radius: 10px; /* Set rounded borders */
+  }
 
-/* Handle when the user hovers over the scrollbar handle */
-.scroll-container::-webkit-scrollbar-thumb:hover {
-  background-color: #676565; /* Set a slightly different color on hover */
-}
+  /* Handle when the user hovers over the scrollbar handle */
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #676565; /* Set a slightly different color on hover */
+  }
 
-/* Handle the scrollbar corner (between vertical and horizontal scrollbar) */
-.scroll-container::-webkit-scrollbar-corner {
-  background-color: transparent; /* Set the background color of the corner */
-}
-
+  /* Handle the scrollbar corner (between vertical and horizontal scrollbar) */
+  .scroll-container::-webkit-scrollbar-corner {
+    background-color: transparent; /* Set the background color of the corner */
+  }
 }

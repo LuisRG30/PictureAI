@@ -42,16 +42,19 @@ const CreateImages = () => {
               <img
                 src="/assets/images/astro.png"
                 alt="astro-img"
-                className="md:w-[175px] w-[250px] md:h-full h-[350px]"
+                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer"
+                onClick={()=> {router.push("/products")}}
               />
               <img
                 src="/assets/images/robot.png"
                 alt="robo-img"
-                className="md:w-[175px] w-[250px] md:h-full h-[350px]"
+                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer"
+                onClick={()=> {router.push("/products")}}
               />
               <div
                 className="md:min-w-[175px] min-w-[250px] md:h-full h-[350px] border border-white rounded-[18px]
-                 bg-purple-gradient flex flex-col items-center md:justify-start justify-center"
+                 bg-purple-gradient flex flex-col items-center md:justify-start justify-center cursor-pointer"
+                 onClick={()=> {router.push("/products")}}
               >
                 <img
                   src="/assets/images/mystery-box.png"
