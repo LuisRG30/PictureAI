@@ -76,7 +76,7 @@ const MysteryBox = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <img src="/assets/images/mystery-box-xls.png" className="w-100px" />
+            <img src="/assets/images/mystery-box-xl.png" className="w-100px" />
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX XL"
