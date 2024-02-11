@@ -19,7 +19,7 @@ const Header = () => {
           <img
             src="/assets/images/logo.png"
             alt="logo-icon"
-            className="w-[160px] h-[68px] object-contain"
+            className="w-[240px] h-[102px] object-contain"
           />
         </div>
 
