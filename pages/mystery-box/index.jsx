@@ -20,7 +20,7 @@ const MysteryBox = () => {
           w-[300px] md:w-full gap-10"
         >
           <div className="flex flex-col justify-center items-center gap-6">
-            <img src="/assets/svgs/silver-box.svg" width={229} height={248} />
+            <img src="/assets/images/mystery-box-s.png" width={229} height={248} />
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX S"
@@ -37,7 +37,7 @@ const MysteryBox = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <img src="/assets/svgs/gold-box.svg" className="w-100px" />
+            <img src="/assets/images/mystery-box-m.png" className="w-100px" />
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX M"
@@ -59,7 +59,7 @@ const MysteryBox = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <img src="/assets/svgs/diamond-box.svg" width={229} height={248} />
+            <img src="/assets/images/mystery-box-l.png" width={229} height={248} />
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX L"
@@ -76,7 +76,7 @@ const MysteryBox = () => {
             </div>
           </div>
           <div className="flex flex-col justify-center items-center gap-6">
-            <img src="/assets/svgs/gold-box.svg" className="w-100px" />
+            <img src="/assets/images/mystery-box-xls.png" className="w-100px" />
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX XL"

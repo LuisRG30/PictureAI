@@ -19,9 +19,8 @@ const Header = () => {
           <img
             src="/assets/images/logo.png"
             alt="logo-icon"
-            className="w-[80px] h-[34px] object-contain"
+            className="w-[160px] h-[68px] object-contain"
           />
-          <h1 className="font-bold">logo</h1>
         </div>
 
         <div className="flex gap-5">
