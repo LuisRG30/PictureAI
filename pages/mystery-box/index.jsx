@@ -41,7 +41,7 @@ const MysteryBox = () => {
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX M"
-              classes="w-full max-w-full bg-purple-gradient"
+              classes="w-full max-w-full"
             />
             <div
               className="border border-1 rounded-md p-4 bg-black-purple w-full"
@@ -80,7 +80,7 @@ const MysteryBox = () => {
             <Button
               onClick={() => navigate.push("/products")}
               text="MYSTERY BOX XL"
-              classes="w-full max-w-full bg-purple-gradient"
+              classes="w-full max-w-full"
             />
             <div
               className="border border-1 rounded-md p-4 bg-black-purple w-full"

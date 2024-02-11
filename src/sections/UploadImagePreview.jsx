@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { Button, ImageGallery, UploadImage, Modal } from "@/src/components";
 import { Preferences } from "@/src/components/Preferences";
 import { stripeCheckout, verifyFaceFromImage } from "@/src/store/images/imagesActions";
@@ -8,9 +10,11 @@ import {
 } from "@/src/store/images/imagesSlice";
 import { getMappedProductsOfFilters } from "@/src/utils/filtersHelper";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NotifyModal, TermsModal} from "@/src/sections";
 import { useDispatch, useSelector } from "react-redux";
+
+import DotLoader from "react-spinners/DotLoader";
 
 const UploadImagePreviewSection = ({ selectedFilters }) => {
   const dispatch = useDispatch();
@@ -23,6 +27,9 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
   const [hairColors, setHairColors] = useState([]);
 
   const [varyFacialHair, setVaryFacialHair] = useState(null);
+
+  const [faceCount, setFaceCount] = useState(null);
+  const [faceDetectionLoading, setFaceDetectionLoading] = useState(false);
 
   const handleOpenImageModal = () => {
     //NOTE: You can uncomment this line when changes the face detection api URL in .env file
@@ -90,6 +97,32 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
     return false;
   }
 
+  React.useEffect(() => {
+    if (uploadedImage) {
+      const getFaces = async (image) => {
+        setFaceCount(null);
+        setFaceDetectionLoading(true);
+        try {
+          const formData = new FormData();
+          formData.append('faces', image);
+          const response = await axios.post(process.env.NEXT_PUBLIC_FACE_DETECTION_URI, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'mode': 'cors',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            }
+          });
+          setFaceCount(response.data.faces);
+      } catch (error) {
+        console.log(error);
+      }
+      setFaceDetectionLoading(false);
+      }
+      getFaces(uploadedImage);
+    }
+  }, [uploadedImage]);
+
   return (
     <div className={`xPaddings relative`}>
       <div className="mx-auto flex md:flex-row flex-col justify-between gap-2 max-width">
@@ -110,17 +143,32 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
                 }}
               />
 
-              {error && error.message && (
-                <p className="text-[15px] text-red-500">
-                  {error.message}
-                </p>
-              )}
+              {
+                faceCount !== null && (
+                  <div>
+                    <p className="text-[15px] text-white">
+                      {
+                        faceCount === 1 ? "Your image looks good!": "Couldn't detect your face. Please upload another image with only one face."
+                      }
+                    </p>
+                  </div>
+                )
+              }
+              {
+                faceDetectionLoading && (
+                  <div>
+                    <DotLoader color={"#ffffff"} loading={true} size={50} />
+                  </div>
+                )
+              }
               <Preferences
                 setGender={setGender}
                 toggleSelectHairColor={toggleSelectHairColor}
                 setVaryFacialHair={setVaryFacialHair}
               />
-              <div className="w-full md:px-0 px-5">
+              {
+                faceCount === 1 || faceCount === null && (
+                  <div className="w-full md:px-0 px-5">
                 <Button
                   text={"Checkout"}
                   styles={{
@@ -137,6 +185,8 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
                   }}
                 />
               </div>
+                )
+              }
             </div>
           </div>
         </div>

@@ -70,11 +70,13 @@ const Genres = () => {
   }, [filters]);
 
 
-  const mysteryBoxes = searchedFilters.filter((filter) => filter.tier === "mysterybox");
+  const mysteryBoxes = searchedFilters.filter((filter) => filter.tier === "mysterybox").sort((a, b) => a.order - b.order);
   const commonFilters = searchedFilters.filter((filter) => filter.tier === "common");
   const rareFilters = searchedFilters.filter((filter) => filter.tier === "rare");
   const epicFilters = searchedFilters.filter((filter) => filter.tier === "epic");
   const legendaryFilters = searchedFilters.filter((filter) => filter.tier === "legendary");
+
+  console.log("mysteryBoxes", mysteryBoxes);
 
   const filterSections = [
     { title: "Mystery Box", filters: mysteryBoxes, price: "Starts at $2.99"},

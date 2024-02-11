@@ -112,6 +112,7 @@ const imagesSlice = createSlice({
         genre: product.name,
         gender: product.metadata.gender,
         tier: product.metadata.tier,
+        order: product.metadata.order,
         selected: false,
       }));
     },
