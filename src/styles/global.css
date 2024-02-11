@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Eudoxus Sans", sans-serif;
+  scroll-behavior: smooth;
+  /* background-color: black; */
+}
+body {
+  background-color: black;
+}
+
+@layer components {
+  .max-width {
+    max-width: 100%;
+    width: 100%;
+
+    @screen 2xl {
+      max-width: 1280px;
+    }
+  }
+
+  /* Padding Classes */
+  .paddings {
+    padding: 6px 12px;
+  }
+
+  .yPaddings {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .xPaddings {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .topPaddings {
+    padding-top: 12px;
+  }
+
+  .bottomPaddings {
+    padding-bottom: 12px;
+  }
+
+  /* Media Queries */
+  @media (min-width: 640px) {
+    .paddings {
+      padding: 16px;
+    }
+
+    .yPaddings {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .xPaddings {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+
+    .topPaddings {
+      padding-top: 16px;
+    }
+
+    .bottomPaddings {
+      padding-bottom: 16px;
+    }
+  }
+
+  @media (min-width: 480px) {
+    .paddings {
+      padding: 8px;
+    }
+
+    .yPaddings {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .xPaddings {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    .topPaddings {
+      padding-top: 8px;
+    }
+
+    .bottomPaddings {
+      padding-bottom: 8px;
+    }
+  }
+
+  .gradient-01 {
+    background: linear-gradient(
+      180deg,
+      rgba(128, 128, 128, 1) 0%,
+      rgba(0, 0, 0, 1) 60%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    box-shadow: -5px -5px 250px 0px rgba(255, 255, 255, 0.02) inset;
+    backdrop-filter: blur(21px);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .gradient-03 {
+    position: absolute;
+    width: 140px;
+    height: 180px;
+    left: 0;
+    top: 0;
+    background: rgba(104, 67, 236, 1);
+    filter: blur(95px);
+    border-radius: 50%;
+  }
+
+  .text-gradient {
+    background: linear-gradient(270deg, #2c80ff 59.29%, #e95fff 88.49%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-border {
+    border-radius: 38.125px;
+    border: 1px solid #de29e2;
+    background: rgba(245, 245, 250, 0);
+    box-shadow: -1px -1px 2px 0px #fff inset, 1px 1px 2px 0px rgba(170, 170, 204, 0.5) inset,
+      0.5px 0.5px 1px 0px rgba(119, 54, 130, 0.25) inset, -0.5px -0.5px 1px 0px rgba(255, 255, 255, 0.5) inset;
+  }
+
+  .bg-purple-gradient {
+    background: linear-gradient(180deg, #ca16f0 0%, #270874 100%);
+  }
+
+  .bg-black-purple {
+    background: linear-gradient(180deg, rgba(203, 88, 250, 0) 0%, #8348f0 100%);
+  }
+
+  .sub-text {
+    color: gray;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: white;
+  }
+  h1 {
+    font-size: 21px;
+  }
+  /* Container with margin and custom scrollbar */
+  .scroll-container {
+    padding: 10px; /* Add right margin to the container */
+    overflow-y: scroll; /* Enable vertical scrollbar */
+  }
+
+  /* Define scrollbar track */
+  .scroll-container::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+    height: 9px;
+  }
+
+  /* Handle the scrollbar track */
+  .scroll-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Set the background color of the track */
+    border-radius: 10px; /* Set rounded borders */
+  }
+
+  /* Handle when the user hovers over the scrollbar track */
+  .scroll-container::-webkit-scrollbar-track:hover {
+    background-color: #e0e0e0; /* Set a slightly different color on hover */
+  }
+
+  /* Handle the scrollbar handle */
+  .scroll-container::-webkit-scrollbar-thumb {
+    background-color: #a9a7a7; /* Set the color of the scrollbar handle */
+    border-radius: 10px; /* Set rounded borders */
+  }
+
+  /* Handle when the user hovers over the scrollbar handle */
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: #676565; /* Set a slightly different color on hover */
+  }
+
+  /* Handle the scrollbar corner (between vertical and horizontal scrollbar) */
+  .scroll-container::-webkit-scrollbar-corner {
+    background-color: transparent; /* Set the background color of the corner */
+  }
+}

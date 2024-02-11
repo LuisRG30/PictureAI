@@ -39,6 +39,7 @@ export default async function handler(req, res) {
           return {
             price: product.default_price,
             quantity: 1,
+            adjustable_quantity: { enabled: true }
           }
         }),
         mode: 'payment',
@@ -53,7 +54,6 @@ export default async function handler(req, res) {
         Key: `images/${session.payment_intent}/${image[0].originalFilename}`,
         Body: createReadStream(image[0].filepath),
       });
-      console.log(session.payment_intent)
       const dynamo = new Dynamo();
       const params = {
         TableName: 'customers',

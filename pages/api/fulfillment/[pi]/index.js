@@ -28,10 +28,13 @@ export default async function handler(req, res) {
         }
         const url = await s3.getSignedUrl('getObject', params);
         const object = await s3.getObject(params);
+        
+        const { Metadata } = await s3.headObject(params);
+
         return {
             ...image,
             url,
-            Metadata: object.Metadata
+            Metadata
         }
     }));
 

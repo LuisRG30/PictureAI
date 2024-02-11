@@ -13,5 +13,5 @@ const ServiceCard = ({ name, image, selected }) => {
     );
   };
 
-    export default ServiceCard;
+    export {ServiceCard};
   

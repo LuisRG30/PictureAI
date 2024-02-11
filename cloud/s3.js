@@ -17,6 +17,10 @@ class S3Client {
     return this.s3.getObject(params);
   }
 
+  headObject(params) {
+    return this.s3.headObject(params).promise();
+  }
+
   async getSignedUrl(operation, params) {
     return await this.s3.getSignedUrlPromise(operation, params);
   }
