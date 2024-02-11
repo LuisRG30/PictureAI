@@ -59,7 +59,7 @@ const FulfillmentPage = () => {
             />
           </div>
           <div className="flex flex-col items-center justify-center gap-3">
-            <p className="text-[16px]">FOLDER NAME: Images.zip</p>
+            <p className="text-[16px]">Download All Images</p>
             <Button
               onClick={downloadAll}
               text="Start Download"
@@ -80,6 +80,7 @@ const FulfillmentPage = () => {
               ImageSources={images}
               handleImageSelection={() => {}}
               isSelectedImage={false}
+              isFulfillment={true}
             />
           </div>
         </div>

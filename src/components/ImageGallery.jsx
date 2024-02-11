@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 
+import ImageWithHover from "./ImageWithHover";
+
 const ImageGallery = ({
   ImageSources,
   handleImageSelection,
@@ -10,6 +12,7 @@ const ImageGallery = ({
   handleRemoveImage,
   isFilterBar,
   isPreview,
+  isFulfillment,
 }) => {
   const router = useRouter();
   const selectedStyles =
@@ -18,8 +21,7 @@ const ImageGallery = ({
     "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/5 rounded-md mb-3 relative cursor-pointer";
   return (
     <>
-      {!isRemoveEnabled ? (
-        <div className="flex flex-wrap justify-center w-full gap-4 relative">
+      <div className="flex flex-wrap justify-center w-full gap-4 relative">
           {Array.isArray(ImageSources) &&
             ImageSources.map((img, i) => (
               <div
@@ -50,7 +52,9 @@ const ImageGallery = ({
                     className="absolute w-[12px] h-[12px] cursor-pointer rounded-md"
                   />
                 )}
-                <img
+                {
+                  !isFulfillment ? (
+                    <img
                   key={i}
                   className={`${
                     isFilterBar
@@ -63,6 +67,14 @@ const ImageGallery = ({
                   src={`${img.source || img.url}`}
                   alt={`Image ${i}`}
                 />
+                  ) : (
+                    <ImageWithHover
+                      key={i}
+                      src={`${img.source || img.url}`}
+                      name={img.Metadata.promptname}
+                    />
+                  )
+                }
               </div>
             ))}
           {isPreview && isPreview === true && (
@@ -81,33 +93,6 @@ const ImageGallery = ({
             </div>
           )}
         </div>
-      ) : (
-        <div className="w-full flex flex-wrap gap-3 ">
-          {ImageSources.map((filter, index) => (
-            <div
-              key={index}
-              className="h-[90px] w-[90px] flex-shrink-0 relative border
-            rounded-xl border-gray-800 justify-center items-center flex"
-              style={{ height: "80px", width: "90px" }}
-            >
-              <img
-                src={`assets/svgs/trash.svg`}
-                alt={`img-${index}`}
-                style={{ top: "5px", right: "5px" }}
-                className="absolute w-[12px] h-[12px] cursor-pointer"
-                onClick={() => {
-                  handleRemoveImage(filter?.id);
-                }}
-              />
-              <img
-                src={`assets/images/${filter.source}`}
-                alt={`img-${index}`}
-                style={{ height: "50px", width: "50px" }}
-              />
-            </div>
-          ))}
-        </div>
-      )}
     </>
   );
 };

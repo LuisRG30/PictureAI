@@ -30,7 +30,8 @@ const CreateImages = () => {
             <div className="flex flex-col md:max-w-[70%] max-w-[100%] md:pt-6 pt-0">
               <p className="sub-text text-[20px]">
                 Upload a photo of yourself and create unique images with our
-                powerful AI technology. Select 
+                powerful AI technology. Select the concepts you would like to create directly or try your
+                luck with our reasonably priced mystery boxes.
               </p>
             </div>  
 
@@ -39,15 +40,15 @@ const CreateImages = () => {
              h-full gap-5 md:items-start items-center"
             >
               <img
-                src="/assets/images/astro.png"
+                src="/assets/images/got.jpeg"
                 alt="astro-img"
-                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer"
+                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer rounded-lg"
                 onClick={()=> {router.push("/products")}}
               />
               <img
-                src="/assets/images/robot.png"
+                src="/assets/images/janissary.jpeg"
                 alt="robo-img"
-                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer"
+                className="md:w-[175px] w-[250px] md:h-full h-[350px] cursor-pointer rounded-lg"
                 onClick={()=> {router.push("/products")}}
               />
               <div

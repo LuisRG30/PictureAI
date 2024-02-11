@@ -53,7 +53,10 @@ const UploadImage = ({ setUploadedImage, clearUploadedImage, image }) => {
           {preview ? (
             <img src={preview} alt="Preview" className="max-h-full max-w-full w-full object-contain" />
           ) : (
-            <p className="text-[20px] text-center">Preview</p>
+            <div className='flex flex-col gap-4'>
+            <p className="text-[20px] text-center">Upload a photo of yourself</p>
+            <p className="text-[12px] text-center">Use good lighting. Take a front picture. Avoid glasses and other garments.</p>
+            </div>
           )}
           {preview && (
             <div

@@ -1,15 +1,8 @@
 import { Button } from "@/src/components";
 import { useRouter } from "next/navigation";
 
-import { toggleFilter } from "@/src/store/images/imagesSlice";
-
 const MysteryBox = () => {
   const navigate = useRouter();
-
-  const handleToggleFilter = (id) => {
-    dispatch(toggleFilter({ id }));
-  }
-
   return (
     <div className={`xPaddings yPaddings relative`}>
       <div

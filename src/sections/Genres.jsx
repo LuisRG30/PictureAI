@@ -69,6 +69,21 @@ const Genres = () => {
     setSelectedFilters(newFilters);
   }, [filters]);
 
+
+  const mysteryBoxes = searchedFilters.filter((filter) => filter.tier === "mysterybox");
+  const commonFilters = searchedFilters.filter((filter) => filter.tier === "common");
+  const rareFilters = searchedFilters.filter((filter) => filter.tier === "rare");
+  const epicFilters = searchedFilters.filter((filter) => filter.tier === "epic");
+  const legendaryFilters = searchedFilters.filter((filter) => filter.tier === "legendary");
+
+  const filterSections = [
+    { title: "Mystery Box", filters: mysteryBoxes, price: "Starts at $2.99"},
+    { title: "Common", filters: commonFilters, price: "$1.99" },
+    { title: "Rare", filters: rareFilters, price: "$9.99" },
+    { title: "Epic", filters: epicFilters, price: "$39.99" },
+    { title: "Legendary", filters: legendaryFilters, price: "$99.99" },
+  ]
+
   const gradientStyle = {
     backgroundImage: "linear-gradient(to right, rgba(222, 41, 226, 0.08), blue 500)",
   };
@@ -158,12 +173,23 @@ const Genres = () => {
         ) : (
           <>
             {searchedFilters && searchedFilters.length > 0 ? (
-              <div className="max-h-[600px] w-full overflow-auto">
-                <ImageGallery
-                  ImageSources={searchedFilters}
-                  handleImageSelection={handleToggleFilter}
-                  isSelectedImage={false}
-                />
+              <div className="flex flex-col overflow-auto h-screen max-h-[600px] w-full ">
+              {
+                filterSections.map((section, i) => (
+                   <div className="flex flex-col">
+                      <div className="flex justify-center items-center w-full h-[50px]">
+                        <p className="text-[20px] font-bold text-white">
+                          {section.title}: {section.price}
+                        </p>
+                      </div>
+                      <ImageGallery
+                        ImageSources={section.filters}
+                        handleImageSelection={handleToggleFilter}
+                        isSelectedImage={false}
+                      />
+                    </div>
+              ))
+              }
               </div>
             ) : (
               <div className="flex w-[100%] h-[100%]  xl:h-[380px] justify-center items-center">
