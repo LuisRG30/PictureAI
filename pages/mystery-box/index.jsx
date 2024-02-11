@@ -1,8 +1,15 @@
 import { Button } from "@/src/components";
 import { useRouter } from "next/navigation";
 
+import { toggleFilter } from "@/src/store/images/imagesSlice";
+
 const MysteryBox = () => {
   const navigate = useRouter();
+
+  const handleToggleFilter = (id) => {
+    dispatch(toggleFilter({ id }));
+  }
+
   return (
     <div className={`xPaddings yPaddings relative`}>
       <div
@@ -13,7 +20,7 @@ const MysteryBox = () => {
           className="sm:text-[55px] text-[35px] 
               font-bold p-0 leading-none"
         >
-          MYSTERY PACKAGES
+          MYSTERY BOXES
         </h1>
         <div
           className="flex md:flex-row flex-col mt-20 justify-between

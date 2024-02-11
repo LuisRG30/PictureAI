@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ImageGallery } from "../components";
 
+import { GenderMap, TierMap } from "../utils/constants";
+
 export default function FiltersSidebar({
   handleSelectedGender,
   genders,
@@ -64,7 +66,7 @@ export default function FiltersSidebar({
                 handleSelectedGender(item);
               }}
             >
-              {item.value}
+              {GenderMap.get(item.value)}
             </div>
           ))}
         </div>
@@ -93,7 +95,7 @@ export default function FiltersSidebar({
               }}
               key={key}
             >
-              {item.value}
+              {TierMap.get(item.value)}
             </div>
           ))}
         </div>

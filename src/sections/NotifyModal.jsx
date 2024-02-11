@@ -32,7 +32,6 @@ const NotifyModal = ({ isOpen, onClose, error, OnSuccess }) => {
             paddingRight: 50,
           }}
           onClick={()=>{
-            console.log("btn click")
             onClose();
             OnSuccess();
         }}

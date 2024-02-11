@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className={`xPaddings py-4 relative`}>
+    <div className={`xPaddings py-4 relative mt-20`}>
       <div className={`mx-auto flex md:flex-row flex-col justify-between gap-8 max-width`}>
         <div className="flex flex-col justify-start items-start gap-4 md:max-w-[70%]">
           <div className="flex flex-row justify-center items-center gap-3">

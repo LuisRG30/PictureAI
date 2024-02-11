@@ -78,47 +78,40 @@ const Genres = () => {
     <div className="flex flex-col w-full py-4 gap-4">
       <div className="flex md:flex-row flex-col md:gap-0 gap-2 w-full justify-between">
         <div className="flex flex-col gap-2 md:w-[60%] w-full">
-          <p className="md:text-[20px]  font-bold">Genres</p>
-          <Dropdown
-            options={genres?.filter((genre) => !genre.selected)}
-            placeholder={"Select Genre..."}
-            handleSelectedOption={handleSelectedGenre}
-          />
+          <div
+            className={`flex flex-row gap-2 w-full overflow-auto
+            scroll-container max-w-full`}
+          >
+          {[{ value: "Filters", selected: false }, ...(genres?.filter((genre) => genre.selected) || [])]?.map(
+            (item, i) => (
+              <div className="relative">
+                <Button
+                  text={item.value}
+                  showDelBtn={item.value === "Filters" ? false : true}
+                  image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
+                  key={i}
+                  styles={{ minWidth: 160 }}
+                  delBtnClick={() => {
+                    handleSelectedGenre(item);
+                  }}
+                  onClick={() => {
+                    if (item.value === "Filters") {
+                      setOpenModal(!openModal);
+                    }
+                  }}
+                />
+              </div>
+            )
+          )}
+          </div>
         </div>
         <div className="flex flex-col gap-2 md:w-[38%] w-full">
-          <p className="md:text-[20px] text-[16px] font-bold">Search</p>
           <SearchBar
             onClick={onSearchClick}
             searchInput={searchInput}
             setSearchInput={setSearchInput}
           />
         </div>
-      </div>
-      <div
-        className={`flex flex-row gap-2 w-full overflow-auto
-       scroll-container max-w-full`}
-      >
-        {[{ value: "Filters", selected: false }, ...(genres?.filter((genre) => genre.selected) || [])]?.map(
-          (item, i) => (
-            <div className="relative">
-              <Button
-                text={item.value}
-                showDelBtn={item.value === "Filters" ? false : true}
-                image={item.value === "Filters" ? "/assets/svgs/filters.svg" : null}
-                key={i}
-                styles={{ minWidth: 160 }}
-                delBtnClick={() => {
-                  handleSelectedGenre(item);
-                }}
-                onClick={() => {
-                  if (item.value === "Filters") {
-                    setOpenModal(!openModal);
-                  }
-                }}
-              />
-            </div>
-          )
-        )}
       </div>
       {/* make parent dive and rap the image gallery to a div */}
       <div className="h-[100%]   w-full flex flex-row">
@@ -182,9 +175,26 @@ const Genres = () => {
       </div>
 
       {!isLoading && (
-        <div className="flex md:flex-row flex-col w-full justify-between items-center ">
-          <div className="flex flex-col w-[200px] justify-center items-center"></div>
+        <div className="flex fixed w-5/6 bottom-10 justify-between items-center">
           <div className="flex flex-col w-[200px] justify-center items-center">
+            <button
+              className="md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
+          border-gray-500 w-max hover:bg-[#DE29E233]"
+            style={{
+              background:
+                "linear-gradient(90deg, #E85EFF 0%, #6843EC 108.39%)",
+            }}
+              onClick={() => router.push("/mystery-box", { scroll: false })}
+            >
+              <p className="text-[18px] font-bold font-san">Try Mystery Box</p>
+            </button>
+            <img
+              src="/assets/images/mystery-box.png"
+              alt="atro-img"
+              className="w-[195px] h-[190px]"
+            />
+          </div>
+          <div className="flex flex-col w-[200px] justify-center items-end mt-5">
             <button
               className="flex w-64 h-14 justify-center items-center self-center md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
           border-gray-500  "
@@ -195,20 +205,6 @@ const Genres = () => {
               onClick={() => router.push("/preview", { scroll: false })}
             >
               <p className="text-[18px] font-bold font-san">Generate</p>
-            </button>
-          </div>
-          <div className="flex flex-col w-[200px] justify-center items-center">
-            <img
-              src="/assets/images/mystery-box.png"
-              alt="atro-img"
-              className="w-[195px] h-[190px]"
-            />
-            <button
-              className="md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
-          border-gray-500 w-max hover:bg-[#DE29E233]"
-              onClick={() => router.push("/mystery-box", { scroll: false })}
-            >
-              <p className="md:text-[15px] text-[13px]">Try Mystery Box</p>
             </button>
           </div>
         </div>
