@@ -7,10 +7,10 @@ const Footer = () => {
         <div className="flex flex-col justify-start items-start gap-4 md:max-w-[70%]">
           <div className="flex flex-row justify-center items-center gap-3">
             <img
-              src="/assets/svgs/logo.svg"
-              alt="logo-icon"
-              className="w-[34px] h-[34px] object-contain"
-            />
+            src="/assets/images/logo.png"
+            alt="logo-icon"
+            className="w-[80px] h-[34px] object-contain"
+          />
             <h1 className="font-bold">logo</h1>
           </div>
 
