@@ -73,7 +73,7 @@ const CreateImages = () => {
           </div>
         </div>
       </div>
-      <div className="w-screen mt-20 grid lg:grid-cols-2 lg:grid-rows-1 md:grid-rows-2 gap-4" style={{ flex: 1}}>
+      <div className="w-full mt-20 grid lg:grid-cols-2 lg:grid-rows-1 md:grid-rows-2 gap-4" style={{ flex: 1}}>
         <div>
           <div className="mt-20">
             <p

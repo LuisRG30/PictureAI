@@ -76,7 +76,6 @@ const Genres = () => {
   const epicFilters = searchedFilters.filter((filter) => filter.tier === "epic");
   const legendaryFilters = searchedFilters.filter((filter) => filter.tier === "legendary");
 
-  console.log("mysteryBoxes", mysteryBoxes);
 
   const filterSections = [
     { title: "Mystery Box", filters: mysteryBoxes, price: "Starts at $2.99"},
@@ -203,26 +202,32 @@ const Genres = () => {
       </div>
 
       {!isLoading && (
-        <div className="flex fixed w-5/6 bottom-10 justify-between items-center">
-          <div className="flex flex-col w-[200px] justify-center items-center">
-            <button
-              className="md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
-          border-gray-500 w-max hover:bg-[#DE29E233]"
-            style={{
-              background:
-                "linear-gradient(90deg, #E85EFF 0%, #6843EC 108.39%)",
-            }}
-              onClick={() => router.push("/mystery-box", { scroll: false })}
-            >
-              <p className="text-[18px] font-bold font-san">Try Mystery Box</p>
-            </button>
-            <img
-              src="/assets/images/mystery-box.png"
-              alt="atro-img"
-              className="w-[195px] h-[190px]"
-            />
-          </div>
-          <div className="flex flex-col w-[200px] justify-center items-end mt-5">
+        <div className="flex fixed w-5/6 bottom-4 justify-between items-center">
+          {
+            //Do not show this div if on a mobile device
+            !shouldRenderModal && (
+              <div className="flex flex-col w-[200px] justify-center items-center">
+                <button
+                  className="md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
+              border-gray-500 w-max hover:bg-[#DE29E233]"
+                style={{
+                  background:
+                    "linear-gradient(90deg, #E85EFF 0%, #6843EC 108.39%)",
+                }}
+                  onClick={() => router.push("/mystery-box", { scroll: false })}
+                >
+                  <p className="text-[18px] font-bold font-san">Try Mystery Box</p>
+                </button>
+                <img
+                  src="/assets/images/mystery-box.png"
+                  alt="atro-img"
+                  className="w-[195px] h-[190px]"
+                />
+              </div>
+            )
+
+          }
+          <div className="flex flex-col md:w-[200px] w-full justify-center mt-5">
             <button
               className="flex w-64 h-14 justify-center items-center self-center md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
           border-gray-500  "
