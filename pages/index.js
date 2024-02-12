@@ -23,7 +23,7 @@ export default function PreviewPage() {
   }, []);
 
   return (
-    <>
+    <div>
       <CreateImages />
       <NotifyModal
           isOpen={isOpenNotifyModal}
@@ -31,6 +31,6 @@ export default function PreviewPage() {
           error={error}
           OnSuccess={()=> setIsOpenModal(false)}
         />
-    </>
+    </div>
   );
 }
