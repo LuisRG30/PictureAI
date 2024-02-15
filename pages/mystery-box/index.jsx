@@ -23,16 +23,16 @@ const MysteryBox = () => {
             <img src="/assets/images/mystery-box-s.png" width={229} height={248} />
             <Button
               onClick={() => navigate.push("/products")}
-              text="MYSTERY BOX S"
+              text="Mystery Box S"
               classes=" w-full max-w-full cursor-pointer"
             />
             <div className="border border-1 rounded-md p-4 w-full">
               <p>
-                You may get: <br />
+                Price: $2.99 <br />
+                Includes: <br />
                 <br />
-                1. Lorem Ipsum dolor <br />
-                2. Lorem Ipsum dolor <br />
-                3. Lorem Ipsum dolor{" "}
+                5 concepts, 2 images each (10 images in total)  <br />
+                Luck Multiplier*: 1x{" "}
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ const MysteryBox = () => {
             <img src="/assets/images/mystery-box-m.png" className="w-100px" />
             <Button
               onClick={() => navigate.push("/products")}
-              text="MYSTERY BOX M"
+              text="Mystery Box M"
               classes="w-full max-w-full"
             />
             <div
@@ -50,11 +50,11 @@ const MysteryBox = () => {
               }}
             >
               <p>
-                You may get: <br />
+                Price: $4.99 <br />
+                Includes: <br />
                 <br />
-                1. Lorem Ipsum dolor <br />
-                2. Lorem Ipsum dolor <br />
-                3. Lorem Ipsum dolor{" "}
+                12 concepts, 2 images each (24 images in total)  <br />
+                Luck Multiplier: 4x{" "}
               </p>
             </div>
           </div>
@@ -62,16 +62,16 @@ const MysteryBox = () => {
             <img src="/assets/images/mystery-box-l.png" width={229} height={248} />
             <Button
               onClick={() => navigate.push("/products")}
-              text="MYSTERY BOX L"
+              text="Mystery Box L"
               classes="w-full max-w-full"
             />
             <div className="border border-1 rounded-md p-4 w-full">
               <p>
-                You may get: <br />
+              Price: $9.99 <br />
+                Includes: <br />
                 <br />
-                1. Lorem Ipsum dolor <br />
-                2. Lorem Ipsum dolor <br />
-                3. Lorem Ipsum dolor{" "}
+                25 concepts, 2 images each (50 images in total)  <br />
+                Luck Multiplier: 8x{" "}
               </p>
             </div>
           </div>
@@ -79,7 +79,7 @@ const MysteryBox = () => {
             <img src="/assets/images/mystery-box-xl.png" className="w-100px" />
             <Button
               onClick={() => navigate.push("/products")}
-              text="MYSTERY BOX XL"
+              text="Mystery Box XL"
               classes="w-full max-w-full"
             />
             <div
@@ -89,11 +89,11 @@ const MysteryBox = () => {
               }}
             >
               <p>
-                You may get: <br />
+                Price: $19.99 <br />
+                Includes: <br />
                 <br />
-                1. Lorem Ipsum dolor <br />
-                2. Lorem Ipsum dolor <br />
-                3. Lorem Ipsum dolor{" "}
+                50 concepts, 2 images each (100 images in total)  <br />
+                Luck Multiplier: 16x{" "}
               </p>
             </div>
           </div>
