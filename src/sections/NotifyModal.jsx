@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal } from "@/src/components";
 import { errorModalData, successModalData } from "@/src/utils/constants";
 
-const NotifyModal = ({ isOpen, onClose, error, OnSuccess }) => {
+const NotifyModal = ({ isOpen, onClose, error, OnSuccess, subtitle, message }) => {
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       <div className="flex justify-center items-center flex-col min-w-[300px] w-full gap-5" style={{ padding: 50 }}>
@@ -14,13 +14,13 @@ const NotifyModal = ({ isOpen, onClose, error, OnSuccess }) => {
         </p>
         <div className="flex flex-col gap-2">
           <p className="text-gray-600 font-bold text-[16px] text-center">
-            {error ? errorModalData.subTitle : successModalData.subTitle}
+            {error ? errorModalData.subTitle : subtitle ? subtitle : successModalData.subTitle}
           </p>
           <p className="text-gray-600 font-bold text-[16px] text-center">
             {error ? errorModalData.subTitle2 : successModalData.subTitle2}
           </p>
           <p className="text-gray-600 text-[16px] text-center">
-            {error ? errorModalData.message : successModalData.message}
+            {error ? errorModalData.message : message ? message: successModalData.message}
           </p>
         </div>
         <Button
