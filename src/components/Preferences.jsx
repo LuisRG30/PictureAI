@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Preferences = ({ setGender, toggleSelectHairColor, setVaryFacialHair }) => {
+export const Preferences = ({ setGender, hairColorMap, hairColors, toggleSelectHairColor, setVaryFacialHair }) => {
   return (
     <div className="md:w-full w-[90%]">
       <p className="mt-2">Choose a prefered gender</p>
@@ -32,78 +32,23 @@ export const Preferences = ({ setGender, toggleSelectHairColor, setVaryFacialHai
       </div>
       <p className="mt-2">Choose one or more of these hair colors</p>
       <div className="flex flex-row gap-3 flex-wrap">
-        <div>
-          <input
-            type="checkbox"
-            id="blonde"
-            name="hair"
-            value="blonde"
-            onClick={() => toggleSelectHairColor("blonde")}
-          />
-          <label className="text-white text-[15px] pl-1" for="blonde">
-            Blonde
-          </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="brown"
-            name="hair"
-            value="brown"
-            onClick={() => toggleSelectHairColor("brown")}
-          />
-          <label className="text-white text-[15px] pl-1" for="brown">
-            Brown
-          </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="black"
-            name="hair"
-            value="black"
-            onClick={() => toggleSelectHairColor("black")}
-          />
-          <label className="text-white text-[15px] pl-1" for="black">
-            Black
-          </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="red"
-            name="hair"
-            value="red"
-            onClick={() => toggleSelectHairColor("red")}
-          />
-          <label className="text-white text-[15px] pl-1" for="red">
-            Red
-          </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="grey"
-            name="hair"
-            value="grey"
-            onClick={() => toggleSelectHairColor("grey")}
-          />
-          <label className="text-white text-[15px] pl-1" for="grey">
-            Grey
-          </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="white"
-            name="hair"
-            value="white"
-            onClick={() => toggleSelectHairColor("white")}
-          />
-          <label className="text-white text-[15px] pl-1" for="white">
-            White
-          </label>
-        </div>
+        {
+          Array.from(hairColorMap).map(([key, value]) => (
+            <div key={key}>
+              <input
+                type="checkbox"
+                id={key}
+                name={key}
+                value={key}
+                onClick={() => toggleSelectHairColor(key)}
+                checked={hairColors.includes(key)}
+              />
+              <label className="text-white text-[15px] pl-1" for={key}>
+                {value}
+              </label>
+            </div>
+          ))
+        }
       </div>
       <p className="mt-2">Would you like us to create pictures with varied facial hair styles?</p>
       <div className="flex flex-row gap-3">
