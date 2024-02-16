@@ -50,6 +50,14 @@ const Footer = () => {
                 className="w-[20px] h-[20px] object-contain"
               />
             </Link>
+
+            <Link href="https://www.youtube.com/channel/UCDef6io0kqT3chP6VygyBEQ" className="flex items-center">
+              <img
+                src="/assets/svgs/youtube-logo.svg"
+                alt="arrow-icon"
+                className="w-[20px] h-[20px] object-contain"
+              />
+            </Link>
           </div>
         </div>
       </div>
