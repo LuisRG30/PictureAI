@@ -110,6 +110,7 @@ const imagesSlice = createSlice({
         source: product.images[0],
         id: product.id,
         genre: product.name,
+        price: product.metadata.price,
         gender: product.metadata.gender,
         tier: product.metadata.tier,
         order: product.metadata.order,

@@ -1,4 +1,4 @@
-import { ImageGallery, Loader } from "@/src/components";
+import { Footer, ImageGallery, Loader } from "@/src/components";
 import { UploadImagePreviewSection } from "@/src/sections";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -23,6 +23,7 @@ export default function Preview() {
           <Loader />
         </div>
       ) : (
+        <div>
         <div className="flex flex-col xPaddings relative w-full py-4 gap-4 h-[100%]  justify-center items-center space-y-4">
           <p className=" text-xl font-bold text-center leading-4 text-white">
             Filters Selected
@@ -37,6 +38,8 @@ export default function Preview() {
             />
             <UploadImagePreviewSection selectedFilters={selectedFilters} />
           </div>
+        </div>
+        <Footer />
         </div>
       )}
     </>

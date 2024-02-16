@@ -2,6 +2,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 
+import Image from "next/image";
+
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
@@ -24,11 +26,13 @@ const Header = () => {
         </div>
 
         <div className="flex gap-5">
-          <Link href="/" className="flex items-center">
+          <Link href="/mystery-boxes" className="flex items-center">
             <p
-              className={`${pathname === "/" ? "text-white" : "text-gray-500"}`}
+              className={`${
+                pathname === "/mystery-box" ? "text-white" : "text-gray-500"
+              }`}
             >
-              Home
+              Mystery Boxes
             </p>
           </Link>
           <Link href="/products" className="flex items-center">
@@ -38,7 +42,7 @@ const Header = () => {
                   pathname === "/products" ? "text-white" : "text-gray-500"
                 }`}
               >
-                Products
+                Buy Now
               </p>
             </div>
           </Link>

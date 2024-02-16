@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Button, ImageGallery } from "@/src/components";
+import { Button, Footer, ImageGallery } from "@/src/components";
 
 const FulfillmentPage = () => {
   const router = useRouter();
@@ -40,6 +40,7 @@ const FulfillmentPage = () => {
   }
 
   return (
+    <div>
     <div className={`xPaddings yPaddings relative`}>
       <div
         className={`mx-auto flex flex-col justify-center
@@ -85,6 +86,8 @@ const FulfillmentPage = () => {
           </div>
         </div>
       )}
+    </div>
+    <Footer />
     </div>
   );
 };

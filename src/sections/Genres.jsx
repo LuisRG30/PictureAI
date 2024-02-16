@@ -78,7 +78,7 @@ const Genres = () => {
 
 
   const filterSections = [
-    { title: "Mystery Box", filters: mysteryBoxes, price: "Starts at $2.99"},
+    { title: "Mystery Box", filters: mysteryBoxes, price: ""},
     { title: "Common", filters: commonFilters, price: "$1.99" },
     { title: "Rare", filters: rareFilters, price: "$9.99" },
     { title: "Epic", filters: epicFilters, price: "$39.99" },
@@ -91,7 +91,7 @@ const Genres = () => {
   const shouldRenderModal = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
 
   return (
-    <div className="flex flex-col w-full py-4 gap-4">
+    <div className="flex flex-col w-full py-4 gap-4 mb-40">
       <div className="flex md:flex-row flex-col md:gap-0 gap-2 w-full justify-between">
         <div className="flex flex-col gap-2 md:w-[60%] w-full">
           <div
@@ -187,6 +187,7 @@ const Genres = () => {
                         ImageSources={section.filters}
                         handleImageSelection={handleToggleFilter}
                         isSelectedImage={false}
+                        showPrice={section.title === "Mystery Box"}
                       />
                     </div>
               ))

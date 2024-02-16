@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 
+import Image from "next/image";
+
 import ImageWithHover from "./ImageWithHover";
 
 const ImageGallery = ({
@@ -13,6 +15,7 @@ const ImageGallery = ({
   isFilterBar,
   isPreview,
   isFulfillment,
+  showPrice,
 }) => {
   const router = useRouter();
   const selectedStyles =
@@ -21,7 +24,7 @@ const ImageGallery = ({
     "flex-shrink-0 w-2/5 sm:w-1/4 md:w-1/5 rounded-md mb-3 relative cursor-pointer";
   return (
     <>
-      <div className="flex flex-wrap justify-center w-full gap-4 relative">
+      <div className="flex flex-wrap justify-center w-full gap-4">
           {Array.isArray(ImageSources) &&
             ImageSources.map((img, i) => (
               <div
@@ -42,6 +45,7 @@ const ImageGallery = ({
                       className="w-[11px] h-[11px]"
                       alt="Checkmark"
                     />
+                  
                   </div>
                 )}
                 {isRemoveEnabled && (
@@ -54,6 +58,7 @@ const ImageGallery = ({
                 )}
                 {
                   !isFulfillment ? (
+                  <div className="flex flex-col justify-center items-center">
                     <img
                   key={i}
                   className={`${
@@ -67,6 +72,12 @@ const ImageGallery = ({
                   src={`${img.source || img.url}`}
                   alt={`Image ${i}`}
                 />
+                {showPrice && (
+                  <p className="text-[20px] font-bold text-[#2D3541]">
+                    ${img.price}
+                  </p>
+                )}
+                </div>
                   ) : (
                     <ImageWithHover
                       key={i}
