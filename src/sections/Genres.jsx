@@ -228,7 +228,9 @@ const Genres = () => {
             )
 
           }
-          <div className="flex flex-col md:w-[200px] w-full justify-center mt-5">
+          {
+            selectedFilters.length > 0 && (
+              <div className="flex flex-col md:w-[200px] w-full justify-center mt-5">
             <button
               className="flex w-64 h-14 justify-center items-center self-center md:p-2 p-1 md:px-6 px-4 rounded-3xl border hover:border-[1px]
           border-gray-500  "
@@ -241,6 +243,8 @@ const Genres = () => {
               <p className="text-[18px] font-bold font-san">Generate</p>
             </button>
           </div>
+            )
+          }
         </div>
       )}
     </div>
