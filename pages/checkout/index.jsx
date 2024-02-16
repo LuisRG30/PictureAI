@@ -1,3 +1,4 @@
+import { Footer } from "@/src/components";
 import { useState } from "react";
 
 const CheckoutPage = () => {
@@ -13,6 +14,7 @@ const CheckoutPage = () => {
     console.log("Applying promo code:", promoCode);
   };
   return (
+    <div>
     <div className={`xPaddings yPaddings relative`}>
       <div className={`mx-auto flex flex-col justify-between gap-8 max-width`}>
         <p className="md:text-[20px] text-[17px]">PAY TDSE</p>
@@ -83,6 +85,8 @@ const CheckoutPage = () => {
           <p className="text-[18px] font-bold">MX $50.00</p>
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };

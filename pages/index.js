@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CreateImages, NotifyModal } from '@/src/sections';
 import { useRouter } from 'next/router'
+import { Footer } from '@/src/components';
 
 
 export default function PreviewPage() {
@@ -31,6 +32,7 @@ export default function PreviewPage() {
           error={error}
           OnSuccess={()=> setIsOpenModal(false)}
         />
+      <Footer />
     </div>
   );
 }

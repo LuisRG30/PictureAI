@@ -1,9 +1,10 @@
-import { Button } from "@/src/components";
+import { Button, Footer } from "@/src/components";
 import { useRouter } from "next/navigation";
 
 const MysteryBox = () => {
   const navigate = useRouter();
   return (
+    <div>
     <div className={`xPaddings yPaddings relative`}>
       <div
         className={`mx-auto flex flex-col justify-center
@@ -99,6 +100,8 @@ const MysteryBox = () => {
           </div>
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
   );
 };
