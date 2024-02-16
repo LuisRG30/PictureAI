@@ -26,7 +26,7 @@ const Header = () => {
         </div>
 
         <div className="flex gap-5">
-          <Link href="/mystery-boxes" className="flex items-center">
+          <Link href="/mystery-box" className="flex items-center">
             <p
               className={`${
                 pathname === "/mystery-box" ? "text-white" : "text-gray-500"
