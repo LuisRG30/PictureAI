@@ -15,6 +15,7 @@ import { NotifyModal, TermsModal} from "@/src/sections";
 import { useDispatch, useSelector } from "react-redux";
 
 import DotLoader from "react-spinners/DotLoader";
+import { hairColorMap } from "../utils/constants";
 
 const UploadImagePreviewSection = ({ selectedFilters }) => {
   const dispatch = useDispatch();
@@ -123,6 +124,13 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
     }
   }, [uploadedImage]);
 
+  React.useEffect(() => {
+    //Inlcude all hair colors by default
+    for (const [key, value] of hairColorMap.entries()) {
+      setHairColors((hairColors) => [...hairColors, key]);
+    }
+  }, []);
+
   return (
     <div className={`xPaddings relative`}>
       <div className="mx-auto flex md:flex-row flex-col justify-between gap-2 max-width">
@@ -163,6 +171,8 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
               }
               <Preferences
                 setGender={setGender}
+                hairColorMap={hairColorMap}
+                hairColors={hairColors}
                 toggleSelectHairColor={toggleSelectHairColor}
                 setVaryFacialHair={setVaryFacialHair}
               />
@@ -170,6 +180,7 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
                 faceCount === 1 || faceCount === null && (
                   <div className="w-full md:px-0 px-5">
                 <Button
+                  disabled={gender != null && hairColors.length > 0 && varyFacialHair != null ? false : true}
                   text={"Checkout"}
                   styles={{
                     background:

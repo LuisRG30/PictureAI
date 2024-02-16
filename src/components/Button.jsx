@@ -9,7 +9,8 @@ const Button = ({
   textClasses = "",
   onClick,
   showDelBtn,
-  delBtnClick
+  delBtnClick,
+  disabled
 }) => {
   const [isViewDelBtn, setIsViewDelBtn] = useState(false);
   return (
@@ -20,11 +21,13 @@ const Button = ({
             isSelected
               ? "bg-[#DE29E233] hover:bg-[#DE29E244]"
               : "hover:bg-[#DE29E233]"
-          } ${classes}`}
+          } 
+          ${classes} ${disabled ? "opacity-50" : ""}`}
       onClick={onClick}
       onMouseEnter={()=> {setIsViewDelBtn(true)}}
       onMouseLeave={()=> {setIsViewDelBtn(false)}}
       style={styles}
+      disabled={disabled}
     >
       <div className="flex items-center"> {/* Wrap content in a flex container */}
         <p

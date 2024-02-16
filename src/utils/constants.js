@@ -31,3 +31,12 @@ export const GenderMap = new Map([
     ["man", "Man"],
     ["woman", "Woman"]
 ]);
+
+export const hairColorMap = new Map([
+    ["black", "Black"],
+    ["blonde", "Blonde"],
+    ["brown", "Brown"],
+    ["gray", "Gray"],
+    ["red", "Red"],
+    ["white", "White"]
+]);
