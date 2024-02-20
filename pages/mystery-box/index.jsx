@@ -50,7 +50,7 @@ const MysteryBox = () => {
               }}
             >
               <p>
-                Price: $4.99 <br />
+                Price: $5.99 <br />
                 Includes: <br />
                 <br />
                 12 concepts, 2 images each (24 images in total)  <br />
