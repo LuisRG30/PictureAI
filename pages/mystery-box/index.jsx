@@ -1,8 +1,17 @@
+import React from "react";
+
+import ReactGA from "react-ga4";
+
 import { Button, Footer } from "@/src/components";
 import { useRouter } from "next/navigation";
 
 const MysteryBox = () => {
   const navigate = useRouter();
+
+  React.useEffect(() => {
+    ReactGA.initialize(process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID);
+  }, []);
+
   return (
     <div>
     <div className={`xPaddings yPaddings relative`}>

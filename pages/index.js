@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ReactGA from 'react-ga4';
+
 import { CreateImages, NotifyModal } from '@/src/sections';
 import { useRouter } from 'next/router'
 import { Footer } from '@/src/components';
@@ -25,6 +27,7 @@ export default function PreviewPage() {
       setIsOpenModal(true);
       setError(true);
     }
+    ReactGA.initialize(process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID);
   }, []);
 
   return (
