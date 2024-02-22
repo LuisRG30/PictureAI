@@ -9,7 +9,7 @@ const MysteryBox = () => {
   const navigate = useRouter();
 
   React.useEffect(() => {
-    ReactGA.initialize(process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID);
+    ReactGA.initialize(process.env.GA4_MEASUREMENT_ID);
   }, []);
 
   return (
