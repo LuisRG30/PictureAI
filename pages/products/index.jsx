@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga4';
+
 import { Genres } from "@/src/sections";
 import { fetchProducts } from '@/src/store/images/imagesActions';
 import { useRouter } from "next/router";
@@ -22,6 +24,7 @@ const Products = () => {
     if(!products || products.length <=0){
       getProducts();
     }
+    ReactGA.initialize(process.env.GA4_MEASUREMENT_ID);
   },[])
 
   return (
