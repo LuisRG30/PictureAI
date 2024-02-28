@@ -73,9 +73,12 @@ const ImageGallery = ({
                   alt={`Image ${i}`}
                 />
                 {showPrice && (
-                  <p className="text-[20px] font-bold text-[#2D3541]">
+                  <>
+                  <p className="text-[20px] font-bold text-[#e0dada]">{img.genre}</p>
+                  <p className="text-[20px] font-bold text-[#e0dada]">
                     ${img.price}
                   </p>
+                  </>
                 )}
                 </div>
                   ) : (
