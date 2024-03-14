@@ -23,9 +23,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="w-full">
-            <p className="font-bold text-[20px]">Terms & Conditions</p>
-          </div>
+          <Link href="/policies">
+            <div className="w-full">
+              <p className="font-bold text-[20px]">Terms & Conditions</p>
+            </div>
+          </Link>
 
           <div className="flex flex-row gap-6">
             <Link href="https://www.tiktok.com/@visageverse" className="flex items-center">
