@@ -5,142 +5,59 @@ const TermsModal = ({ isOpen, onClose, onAgree }) => {
   return (
     <Modal onClose={onClose} isOpen={isOpen}>
       <h2 className="text-gray-600 font-bold text-[24px] text-center mb-4">
-        TERMS & CONDITIONS
+        TERMS OF SERVICE
       </h2>
       <div className="flex flex-col md:w-[600px] lg:w-[900px] w-full gap-5 max-h-[500px]
       scroll-container overflow-y-auto">
         <p className="text-gray-600 mb-4">
-          Last Revised: December 16, Welcome to www.lorem-ipsum.info. This site
-          is provided as a service to our visitors and may be used for
-          informational purposes only. Because the Terms and Conditions contain
-          legal obligations, please read them carefully. 1. YOUR AGREEMENT By
-          using this Site, you agree to be bound by, and to comply with, these
-          Terms and Conditions. If you do not agree to these Terms and
-          Conditions, please do not use this site. PLEASE NOTE: We reserve the
-          right, at our sole discretion, to change, modify or otherwise alter
-          these Terms and Conditions at any time. Unless otherwise indicated,
-          amendments will become effective immediately. Please review these
-          Terms and Conditions periodically. Your continued use of the Site
-          following the posting of changes and/or modifications will constitute
-          your acceptance of the revised Terms and Conditions and the
-          reasonableness of these standards for notice of changes. For your
-          information, this page was last updated as of the date at the top of
-          these terms and conditions. 2. PRIVACY Please review our Privacy
-          Policy, which also governs your visit to this Site, to understand our
-          practices. 3. LINKED SITES This Site may contain links to other
-          independent third-party Web sites ("Linked Sites”). These Linked Sites
-          are provided solely as a convenience to our visitors. Such Linked
-          Sites are not under our control, and we are not responsible for and
-          does not endorse the content of such Linked Sites, including any
-          information or materials contained on such Linked Sites. You will need
-          to make your own independent judgment regarding your interaction with
-          these Linked Sites. 4. FORWARD LOOKING STATEMENTS All materials
-          reproduced on this site speak as of the original date of publication
-          or filing. The fact that a document is available on this site does not
-          mean that the information contained in such document has not been
-          modified or superseded by events or by a subsequent document or
-          filing. We have no duty or policy to update any information or
-          statements contained on this site and, therefore, such information or
-          statements should not be relied upon as being current as of the date
-          you access this site. 5. DISCLAIMER OF WARRANTIES AND LIMITATION OF
-          LIABILITY A. THIS SITE MAY CONTAIN INACCURACIES AND TYPOGRAPHICAL
-          ERRORS. WE DOES NOT WARRANT THE ACCURACY OR COMPLETENESS OF THE
-          MATERIALS OR THE RELIABILITY OF ANY ADVICE, OPINION, STATEMENT OR
-          OTHER INFORMATION DISPLAYED OR DISTRIBUTED THROUGH THE SITE. YOU
-          EXPRESSLY UNDERSTAND AND AGREE THAT: (i) YOUR USE OF THE SITE,
-          INCLUDING ANY RELIANCE ON ANY SUCH OPINION, ADVICE, STATEMENT,
-          MEMORANDUM, OR INFORMATION CONTAINED HEREIN, SHALL BE AT YOUR SOLE
-          RISK; (ii) THE SITE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE"
-          BASIS; (iii) EXCEPT AS EXPRESSLY PROVIDED HEREIN WE DISCLAIM ALL
-          WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT
-          LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-          PARTICULAR PURPOSE, WORKMANLIKE EFFORT, TITLE AND NON-INFRINGEMENT;
-          (iv) WE MAKE NO WARRANTY WITH RESPECT TO THE RESULTS THAT MAY BE
-          OBTAINED FROM THIS SITE, THE PRODUCTS OR SERVICES ADVERTISED OR
-          OFFERED OR MERCHANTS INVOLVED; (v) ANY MATERIAL DOWNLOADED OR
-          OTHERWISE OBTAINED THROUGH THE USE OF THE SITE IS DONE AT YOUR OWN
-          DISCRETION AND RISK; and (vi) YOU WILL BE SOLELY RESPONSIBLE FOR ANY
-          DAMAGE TO YOUR COMPUTER SYSTEM OR FOR ANY LOSS OF DATA THAT RESULTS
-          FROM THE DOWNLOAD OF ANY SUCH MATERIAL. B. YOU UNDERSTAND AND AGREE
-          THAT UNDER NO CIRCUMSTANCES, INCLUDING, BUT NOT LIMITED TO,
-          NEGLIGENCE, SHALL WE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-          SPECIAL, PUNITIVE OR CONSEQUENTIAL DAMAGES THAT RESULT FROM THE USE
-          OF, OR THE INABILITY TO USE, ANY OF OUR SITES OR MATERIALS OR
-          FUNCTIONS ON ANY SUCH SITE, EVEN IF WE HAVE BEEN ADVISED OF THE
-          POSSIBILITY OF SUCH DAMAGES. THE FOREGOING LIMITATIONS SHALL APPLY
-          NOTWITHSTANDING ANY FAILURE OF ESSENTIAL PURPOSE OF ANY LIMITED
-          REMEDY. 6. EXCLUSIONS AND LIMITATIONS SOME JURISDICTIONS DO NOT ALLOW
-          THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF
-          LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, OUR
-          LIABILITY IN SUCH JURISDICTION SHALL BE LIMITED TO THE MAXIMUM EXTENT
-          PERMITTED BY LAW. 7. OUR PROPRIETARY RIGHTS This Site and all its
-          Contents are intended solely for personal, non-commercial use. Except
-          as expressly provided, nothing within the Site shall be construed as
-          conferring any license under our or any third party's intellectual
-          property rights, whether by estoppel, implication, waiver, or
-          otherwise. Without limiting the generality of the foregoing, you
-          acknowledge and agree that all content available through and used to
-          operate the Site and its services is protected by copyright,
-          trademark, patent, or other proprietary rights. You agree not to: (a)
-          modify, alter, or deface any of the trademarks, service marks, trade
-          dress (collectively "Trademarks") or other intellectual property made
-          available by us in connection with the Site; (b) hold yourself out as
-          in any way sponsored by, affiliated with, or endorsed by us, or any of
-          our affiliates or service providers; (c) use any of the Trademarks or
-          other content accessible through the Site for any purpose other than
-          the purpose for which we have made it available to you; (d) defame or
-          disparage us, our Trademarks, or any aspect of the Site; and (e)
-          adapt, translate, modify, decompile, disassemble, or reverse engineer
-          the Site or any software or programs used in connection with it or its
-          products and services. The framing, mirroring, scraping or data mining
-          of the Site or any of its content in any form and by any method is
-          expressly prohibited. 8. INDEMNITY By using the Site web sites you
-          agree to indemnify us and affiliated entities (collectively
-          "Indemnities") and hold them harmless from any and all claims and
-          expenses, including (without limitation) attorney's fees, arising from
-          your use of the Site web sites, your use of the Products and Services,
-          or your submission of ideas and/or related materials to us or from any
-          person's use of any ID, membership or password you maintain with any
-          portion of the Site, regardless of whether such use is authorized by
-          you. 9. COPYRIGHT AND TRADEMARK NOTICE Except our generated dummy
-          copy, which is free to use for private and commercial use, all other
-          text is copyrighted. generator.lorem-ipsum.info © 2013, all rights
-          reserved 10. INTELLECTUAL PROPERTY INFRINGEMENT CLAIMS It is our
-          policy to respond expeditiously to claims of intellectual property
-          infringement. We will promptly process and investigate notices of
-          alleged infringement and will take appropriate actions under the
-          Digital Millennium Copyright Act ("DMCA") and other applicable
-          intellectual property laws. Notices of claimed infringement should be
-          directed to: generator.lorem-ipsum.info 126 Electricov St. Kiev, Kiev
-          04176 Ukraine contact@lorem-ipsum.info 11. PLACE OF PERFORMANCE This
-          Site is controlled, operated and administered by us from our office in
-          Kiev, Ukraine. We make no representation that materials at this site
-          are appropriate or available for use at other locations outside of the
-          Ukraine and access to them from territories where their contents are
-          illegal is prohibited. If you access this Site from a location outside
-          of the Ukraine, you are responsible for compliance with all local
-          laws. 12. GENERAL A. If any provision of these Terms and Conditions is
-          held to be invalid or unenforceable, the provision shall be removed
-          (or interpreted, if possible, in a manner as to be enforceable), and
-          the remaining provisions shall be enforced. Headings are for reference
-          purposes only and in no way define, limit, construe or describe the
-          scope or extent of such section. Our failure to act with respect to a
-          breach by you or others does not waive our right to act with respect
-          to subsequent or similar breaches. These Terms and Conditions set
-          forth the entire understanding and agreement between us with respect
-          to the subject matter contained herein and supersede any other
-          agreement, proposals and communications, written or oral, between our
-          representatives and you with respect to the subject matter hereof,
-          including any terms and conditions on any of customer's documents or
-          purchase orders. B. No Joint Venture, No Derogation of Rights. You
-          agree that no joint venture, partnership, employment, or agency
-          relationship exists between you and us as a result of these Terms and
-          Conditions or your use of the Site. Our performance of these Terms and
-          Conditions is subject to existing laws and legal process, and nothing
-          contained herein is in derogation of our right to comply with
-          governmental, court and law enforcement requests or requirements
-          relating to your use of the Site or information provided to or
-          gathered by us with respect to such use.
+        These Terms of Service govern your use of the website located at https://www.visageverse.com and any related services provided by VisageVerse.
+By accessing https://www.visageverse.com, you agree to abide by these Terms of Service and to comply with all applicable laws and regulations. If you do not agree with these Terms of Service, you are prohibited from using or accessing this website or using any other services provided by VisageVerse.
+We, VisageVerse, reserve the right to review and amend any of these Terms of Service at our sole discretion. Upon doing so, we will update this page. Any changes to these Terms of Service will take effect immediately from the date of publication.
+These Terms of Service were last updated on March 10, 2024.
+Limitations of Use
+By using this website, you warrant on behalf of yourself, your users, and other parties you represent that you will not:
+modify, copy, prepare derivative works of, decompile, or reverse engineer any materials and software contained on this website;
+remove any copyright or other proprietary notations from any materials and software on this website;
+transfer the materials to another person or "mirror" the materials on any other server;
+knowingly or negligently use this website or any of its associated services in a way that abuses or disrupts our networks or any other service VisageVerse provides;
+use this website or its associated services to transmit or publish any harassing, indecent, obscene, fraudulent, or unlawful material;
+use this website or its associated services in violation of any applicable laws or regulations;
+use this website in conjunction with sending unauthorized advertising or spam;
+harvest, collect, or gather user data without the user’s consent; or
+use this website or its associated services in such a way that may infringe the privacy, intellectual property rights, or other rights of third parties.
+Intellectual Property
+The intellectual property in the materials contained in this website are owned by or licensed to VisageVerse and are protected by applicable copyright and trademark law. We grant our users permission to download one copy of the materials for personal, non-commercial transitory use.
+This constitutes the grant of a license, not a transfer of title. This license shall automatically terminate if you violate any of these restrictions or the Terms of Service, and may be terminated by VisageVerse at any time.
+AI-Generated Content
+VisageVerse offers an artificial intelligence (AI) image generation service, whereby users can upload a photograph of their face and receive a selection of images based on the submitted content. The service includes the option to select specific concepts for image creation or to utilize the Mystery Box feature for a variety of randomly selected concepts. By uploading a photograph to the VisageVerse platform, the user grants the company a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, adapt, publish, and display the uploaded photograph for the sole purpose of providing the service detailed herein.
+The images generated by the VisageVerse AI are derived from the user's uploaded photograph and selected concepts or the Mystery Box feature, leading to a wide range of outcomes. Due to the inherent nature of AI-generated content, VisageVerse cannot guarantee that all outcomes will align with user expectations. It is essential for users to acknowledge that the AI's interpretation of the provided photograph and concepts may result in significant variations in the generated images.
+Mystery Boxes
+VisageVerse's Mystery Box feature offers users an opportunity to receive AI-generated images based on a predetermined number of concepts, with each box tier varying in content and price. The purchase of a Mystery Box is final, with no refunds provided due to the digital and customized nature of the generated content. The service's Luck Multiplier, included in the Mystery Box feature, enhances the possibility of receiving unique or rare images but does not guarantee satisfaction or impact the total number of generated images. Users are permitted to use images obtained from Mystery Boxes for personal, non-commercial purposes only, with VisageVerse retaining all rights not expressly granted to the user under these terms.
+Disclaimer and Limitations of Liability
+Our website and the materials on our website are provided on an 'as is' basis. To the extent permitted by law, VisageVerse makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property, or other violation of rights.
+In no event shall VisageVerse or its suppliers be liable for any consequential loss suffered or incurred by you or any third party arising from the use or inability to use this website or the materials on this website, even if VisageVerse or an authorized representative has been notified, orally or in writing, of the possibility of such damage.
+In the context of this agreement, "consequential loss" includes any consequential loss, indirect loss, real or anticipated loss of profit, loss of benefit, loss of revenue, loss of business, loss of goodwill, loss of opportunity, loss of savings, loss of reputation, loss of use and/or loss or corruption of data, whether under statute, contract, equity, tort (including negligence), indemnity or otherwise.
+Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+Accuracy of Materials
+The materials appearing on our website are not comprehensive and are for general information purposes only. VisageVerse does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on this website, or otherwise relating to such materials or on any resources linked to this website. You should not rely solely on the said materials to make decisions, we advise you to consult other, more complete sources of information. You are solely responsible for the strict reliance on the materials posted on our website. We have the right to change the information on our website without prior notice and users are responsible to monitor said changes.
+Additional Tools
+Please note that our website may include third-party tools which are outside of our control. The access to said tools is provided on an 'as is' basis with no warranties, expressed or implied, and without any endorsement. We are not liable for the use of the third-party tools provided on our website. You are solely responsible for any risks associated with using said tools, we recommend reading the relevant third-party provider’s Terms of Service. VisageVerse has the right to offer new third-party tools in the future.
+Links
+VisageVerse has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement, approval or control by VisageVerse of the site. Use of any such linked site is at your own risk and we strongly advise you make your own investigations with respect to the suitability of those sites.
+Inaccuracies and Mistakes
+Please note that any content available on our website may contain typographical errors, inaccuracies, or mistakes related to the service’s description, pricing, promotion, and availability. We have the right to cancel or update any existing services should any information provided by us be proven inaccurate. Said information can be amended at any time without prior notice. Please note that we are not obligated to clarify any of the information related to our website and service, including pricing information, except as required by law.
+Indemnification
+You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys’ fees and expenses, made by any third party due to or arising out of: (1) your Contributions; (2) use of the website; (3) breach of these Terms of Service; (4) any breach of your representations and warranties set forth in these Terms of Service; (5) your violation of the rights of a third party, including but not limited to intellectual property rights; or (6) any overt harmful act toward any other user of the website with whom you connected via the website. 
+Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.
+Right to Terminate
+We may suspend or terminate your right to use our website and terminate these Terms of Service immediately upon written notice to you for any breach of these Terms of Service.
+Severance
+Any term of these Terms of Service which is wholly or partially void or unenforceable is severed to the extent that it is void or unenforceable. The validity of the remainder of these Terms of Service is not affected.
+Entire Agreement
+These Terms of Service and any policies or operating rules posted by us on the website or with respect to the website constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Terms of Service shall not operate as a waiver of such right or provision. These Terms of Service operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We shall not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. 
+If any provision or part of a provision of these Terms of Service is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Terms of Service and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment, or agency relationship created between you and us as a result of these Terms of Service or use of the website. You agree that these Terms of Service will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Terms of Service and the lack of signing by the parties hereto to execute these Terms of Service.
+Governing Law
+These Terms of Service are governed by and construed in accordance with the laws of Mexico. You irrevocably submit to the exclusive jurisdiction of the courts in that location.
         </p>
       </div>
       <div className="flex justify-end gap-2 pt-3">
