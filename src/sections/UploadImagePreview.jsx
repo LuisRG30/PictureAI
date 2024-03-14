@@ -99,6 +99,14 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
   }
 
   function produceResizedImageFile(file) {
+    const DESIRED_FILE_SIZE = 1400000;
+    if (file.size <= DESIRED_FILE_SIZE) {
+      return Promise.resolve(file);
+    }
+    console.log("File size before resizing: ", file.size);
+    console.log("Scaling factor: ", DESIRED_FILE_SIZE / file.size)
+    console.log("File size after resizing: ", file.size * (DESIRED_FILE_SIZE / file.size));
+
     return new Promise((resolve) => {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -106,7 +114,7 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
         img.src = event.target.result;
         img.onload = () => {
           const elem = document.createElement("canvas");
-          const scaleFactor = 0.7;
+          const scaleFactor = DESIRED_FILE_SIZE / file.size;
           elem.width = img.width * scaleFactor;
           elem.height = img.height * scaleFactor;
           const ctx = elem.getContext("2d");
@@ -128,11 +136,6 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
     });
   } 
 
-  async function deliverFile(file) {
-    const delivery = await produceResizedImageFile(file);
-    console.log("delivery", delivery);
-    return delivery;
-  }  
 
   React.useEffect(() => {
     if (uploadedImage) {
