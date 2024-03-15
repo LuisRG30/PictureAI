@@ -149,6 +149,9 @@ const imagesSlice = createSlice({
   },
 });
 
+
+
+
 export const {
   toggleFilter,
   clearFilters,
@@ -168,6 +171,7 @@ export const {
   setPaymentIntent
 } = imagesSlice.actions;
 
+
 export const selectFilters = (state) => state.images.filters;
 export const selectUploadedImage = (state) => state.images.uploadedImage;
 export const selectIsLoading = (state) => state.images.isLoading;
@@ -176,3 +180,5 @@ export const selectGenre = (state) => state.images.genre;
 export const selectFilteredImages = (state) => state.images.filteredImages;
 
 export default imagesSlice.reducer;
+
+

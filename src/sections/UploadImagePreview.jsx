@@ -98,6 +98,45 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
     return false;
   }
 
+  function produceResizedImageFile(file) {
+    const DESIRED_FILE_SIZE = 1400000;
+    if (file.size <= DESIRED_FILE_SIZE) {
+      return Promise.resolve(file);
+    }
+    console.log("File size before resizing: ", file.size);
+    console.log("Scaling factor: ", DESIRED_FILE_SIZE / file.size)
+    console.log("File size after resizing: ", file.size * (DESIRED_FILE_SIZE / file.size));
+
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const elem = document.createElement("canvas");
+          const scaleFactor = DESIRED_FILE_SIZE / file.size;
+          elem.width = img.width * scaleFactor;
+          elem.height = img.height * scaleFactor;
+          const ctx = elem.getContext("2d");
+          ctx.drawImage(img, 0, 0, elem.width, elem.height);
+          ctx.canvas.toBlob(
+            (blob) => {
+              const resizedFile = new File([blob], file.name, {
+                type: "image/jpeg",
+                lastModified: Date.now(),
+              });
+              resolve(resizedFile);
+            },
+            "image/jpeg",
+            1
+          );
+        };
+      };
+      reader.readAsDataURL(file);
+    });
+  } 
+
+
   React.useEffect(() => {
     if (uploadedImage) {
       const getFaces = async (image) => {
@@ -139,8 +178,9 @@ const UploadImagePreviewSection = ({ selectedFilters }) => {
             <div className="flex flex-col min-w-[400px] w-full items-center gap-6">
               <UploadImage
                 image={uploadedImage}
-                setUploadedImage={(img) => {
-                  dispatch(setUploadedImage(img));
+                setUploadedImage={async (img) => {
+                  const resizedFile = await produceResizedImageFile(img);
+                  dispatch(setUploadedImage(resizedFile));
                   handleOpenImageModal();
                   dispatch(setError(null));
                 }}
